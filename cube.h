@@ -30,30 +30,73 @@ typedef	struct s_player
 	double	cam_dir;
 }	t_player;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+typedef struct s_data
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		color;
+}	t_data;
+
+
 typedef	struct s_colors
 {
-	int				f_color_num;
-	int				c_color_num;
-	char			**floor_colors;
-	char			**ceiling_colors;
-	char			*f_hex_color;
-	char			*c_hex_color;
+	int		f_color_num;
+	int		c_color_num;
+	char	**floor_colors;
+	char	**ceiling_colors;
+	char	*f_hex_color;
+	char	*c_hex_color;
 }	t_colors;
 
 typedef	struct s_game
 {
-	void			*mlx;
-	void			*mlx_win;
-	t_colors		*colors;
-	t_player		*player;
-	double			time;
-	double			oldTime;
-	int				fps;
-	double			frameTime;
+	void		*mlx;
+	void		*mlx_win;
+	t_colors	*colors;
+	t_player	*player;
+	double		time;
+	double		oldTime;
+	int			fps;
+	double		frameTime;
+	t_img 		*img;
 }	t_game;
+
+
+// main.c
+void		init_step(t_data *data, t_game *cube);
+void		init_data(t_data *data, t_game *cube, int x);
+void		dda_algorithm(t_data *data);
+void		draw_vertical_line(t_game *cube, t_data *data, int x);
+void		render_map(t_game *cube);
+void		set_color(t_data *data);
 
 // utils.c
 u_int64_t	get_time(void);
-void	ft_sleep(u_int64_t time);
+void		ft_sleep(u_int64_t time);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif
