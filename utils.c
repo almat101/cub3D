@@ -25,3 +25,30 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	dst = img->addr	+ (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+
+int	close_window(t_game *cube)
+{
+	mlx_destroy_window(cube->mlx, cube->mlx_win);
+	free(cube->mlx);
+	exit (1);
+}
+
+void	count_fps(t_game *cube)
+{
+	char *number;
+
+	cube->oldTime = cube->time;
+	cube->time = get_time();
+	cube->frameTime = (cube->time - cube->oldTime) / 1000.0;
+	cube->fps = (int)(1.0 / cube->frameTime);
+	if (cube->fps > 60)
+	{
+		ft_sleep(((1.0 / 60) - cube->frameTime) * 1000);
+		cube->time = get_time();
+		cube->frameTime = (cube->time - cube->oldTime) / 1000.0;
+		cube->fps = (int)(1.0 / cube->frameTime);
+	}
+	number = ft_itoa(cube->fps);
+	mlx_string_put(cube->mlx, cube->mlx_win,
+		screenWidth - 50, 20, -1, number);
+}

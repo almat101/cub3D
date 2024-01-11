@@ -83,8 +83,26 @@ typedef	struct s_game
 	int			fps;
 	double		frameTime;
 	t_img 		*img;
+	char 		**map;
+	char		**real_map;
+	int			map_width;
+	int			map_height;
+	char		*north_texture;
+	char		*south_texture;
+	char		*west_texture;
+	char		*east_texture;
+	char		*ceil_color_rgb;
+	char		*floor_color_rgb;
 }	t_game;
 
+// parser.c
+void		parse_map(char **argv, t_game *cube);
+void		print_map(t_game *cube);
+void		print_texture_value(t_game *cube);
+void		convert_list_to_map(t_game *cube, t_list *lst);
+void		free_list(t_list *lst);
+void		add_line_to_list(t_list **lst, char *line);
+void		parse_texture_and_color(char *line, t_game *cube, t_list *lst);
 
 // main.c
 void		init_step(t_data *data, t_game *cube);
@@ -94,9 +112,30 @@ void		draw_vertical_line(t_game *cube, t_data *data, int x);
 void		render_map(t_game *cube);
 void		set_color(t_data *data);
 
+//check.c
+void		check_cardinals(t_game *cube);
+
+// key.c
+int			key_press(int key, t_game *cube);
+int			key_release(int key, t_game *cube);
+
 // utils.c
 u_int64_t	get_time(void);
 void		ft_sleep(u_int64_t time);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int			close_window(t_game *cube);
+void		count_fps(t_game *cube);
+
+// utils2.c
+void		free_map(t_game *cube);
+void		free_texture(t_game *cube);
+void		print_map(t_game *cube);
+void		free_list(t_list *lst);
+int			ft_exit(t_game *cube);
+
+// texture.c
+void		extract_texture_value(t_game *cube);
+void		print_texture_value(t_game *cube);
+
 
 #endif
