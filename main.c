@@ -14,11 +14,12 @@ int	main (int argc, char **argv)
 	if (argc == 2)
 	{
 		parse_map(argv, &cube);
-		// check cardinals and ceil and floor values
-		check_cardinals(&cube);
-		print_map(&cube);
+		check_card1(&cube);
+		check_card2(&cube);
+
+		print_all_map(&cube);
 		extract_texture_value(&cube);
-		print_texture_value(&cube);
+		//print_texture_value(&cube);
 		free_map(&cube);
 		free_texture(&cube);
 	}
@@ -26,6 +27,3 @@ int	main (int argc, char **argv)
 		printf("Error\nInvalid number of arguments\n");
 	return (0);
 }
-
-
-// todo if i delete a texture i have some leaks

@@ -27,7 +27,7 @@ void	free_texture(t_game *cube)
 }
 
 
-void	print_map(t_game *cube)
+void	print_all_map(t_game *cube)
 {
 	int		i;
 
@@ -35,6 +35,18 @@ void	print_map(t_game *cube)
 	while (cube->map[i] != NULL)
 	{
 		printf("%s", cube->map[i]);
+		i++;
+	}
+}
+
+void	print_real_map(t_game *cube)
+{
+	int		i;
+
+	i = 0;
+	while (cube->real_map[i] != NULL)
+	{
+		printf("%s", cube->real_map[i]);
 		i++;
 	}
 }

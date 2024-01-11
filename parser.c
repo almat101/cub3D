@@ -31,14 +31,17 @@ void check_empty_file(t_list *lst)
 
 int count_lines(t_list *lst)
 {
-    int i = 0;
-    t_list *new = lst;
-    while (new != NULL)
-    {
-        i++;
-        new = new->next;
-    }
-    return i;
+	int		i;
+	t_list	*new;
+
+	i = 0;
+	new = lst;
+	while (new != NULL)
+	{
+		i++;
+		new = new->next;
+	}
+	return i;
 }
 
 void convert_list_to_array(t_list *lst, t_game *cube)
@@ -79,6 +82,5 @@ void	parse_map(char **argv, t_game *cube)
 	convert_list_to_array(lst, cube);
 	free_list(lst);
 }
-
 
 

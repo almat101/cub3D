@@ -113,7 +113,10 @@ void		render_map(t_game *cube);
 void		set_color(t_data *data);
 
 //check.c
-void		check_cardinals(t_game *cube);
+void	check_card1(t_game *cube);
+void	check_card2(t_game *cube);
+
+// map.c
 
 // key.c
 int			key_press(int key, t_game *cube);
@@ -129,7 +132,8 @@ void		count_fps(t_game *cube);
 // utils2.c
 void		free_map(t_game *cube);
 void		free_texture(t_game *cube);
-void		print_map(t_game *cube);
+void		print_all_map(t_game *cube);
+void		print_real_map(t_game *cube);
 void		free_list(t_list *lst);
 int			ft_exit(t_game *cube);
 
