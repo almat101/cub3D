@@ -24,7 +24,7 @@ void	check_card1(t_game *cube)
 	if (count_no != 1 || count_so != 1 || count_we != 1)
 	{
 		printf("Error\nMissing or duplicate cardinal\n");
-		free_map(cube);
+		free_all_map(cube);
 		exit (1);
 	}
 }
@@ -53,7 +53,7 @@ void	check_card2(t_game *cube)
 	if (count_ea != 1 || count_f != 1 || count_c != 1)
 	{
 		printf("Error\nMissing or duplicate cardinal\n");
-		free_map(cube);
+		free_all_map(cube);
 		exit (1);
 	}
 }

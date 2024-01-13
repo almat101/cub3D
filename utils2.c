@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	free_map(t_game *cube)
+void	free_all_map(t_game *cube)
 {
 	int i;
 
@@ -32,6 +32,8 @@ void	print_all_map(t_game *cube)
 	int		i;
 
 	i = 0;
+	if (cube->map == NULL)
+		return ;
 	while (cube->map[i] != NULL)
 	{
 		printf("%s", cube->map[i]);
@@ -44,6 +46,8 @@ void	print_real_map(t_game *cube)
 	int		i;
 
 	i = 0;
+	if (cube->real_map == NULL)
+		return ;
 	while (cube->real_map[i] != NULL)
 	{
 		printf("%s", cube->real_map[i]);
@@ -65,7 +69,7 @@ void free_list(t_list *lst)
 
 int ft_exit(t_game *cube)
 {
-	free_map(cube);
+	free_all_map(cube);
 	free_texture(cube);
 	exit(0);
 }

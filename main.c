@@ -17,10 +17,18 @@ int	main (int argc, char **argv)
 		check_card1(&cube);
 		check_card2(&cube);
 
+		printf("all map:\n");
 		print_all_map(&cube);
+
+		printf("now real map:\n");
+		extract_map(argv, &cube);
+		print_real_map(&cube);
+
+		printf("now texture:\n");
 		extract_texture_value(&cube);
-		//print_texture_value(&cube);
-		free_map(&cube);
+		print_texture_value(&cube);
+		free_all_map(&cube);
+		free_real_map(&cube);
 		free_texture(&cube);
 	}
 	else

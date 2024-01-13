@@ -97,12 +97,10 @@ typedef	struct s_game
 
 // parser.c
 void		parse_map(char **argv, t_game *cube);
-void		print_map(t_game *cube);
-void		print_texture_value(t_game *cube);
-void		convert_list_to_map(t_game *cube, t_list *lst);
-void		free_list(t_list *lst);
-void		add_line_to_list(t_list **lst, char *line);
-void		parse_texture_and_color(char *line, t_game *cube, t_list *lst);
+t_list		*read_file(int fd);
+void		check_empty_file(t_list *lst);
+int			count_lines(t_list *lst);
+void		copy_all_map(t_list *lst, t_game *cube);
 
 // main.c
 void		init_step(t_data *data, t_game *cube);
@@ -113,10 +111,11 @@ void		render_map(t_game *cube);
 void		set_color(t_data *data);
 
 //check.c
-void	check_card1(t_game *cube);
-void	check_card2(t_game *cube);
+void		check_card1(t_game *cube);
+void		check_card2(t_game *cube);
 
 // map.c
+void		extract_map(char **argv, t_game *cube);
 
 // key.c
 int			key_press(int key, t_game *cube);
@@ -130,12 +129,16 @@ int			close_window(t_game *cube);
 void		count_fps(t_game *cube);
 
 // utils2.c
-void		free_map(t_game *cube);
+void		free_all_map(t_game *cube);
 void		free_texture(t_game *cube);
 void		print_all_map(t_game *cube);
 void		print_real_map(t_game *cube);
 void		free_list(t_list *lst);
 int			ft_exit(t_game *cube);
+
+// utils3.c
+void		free_real_map(t_game *cube);
+void		free_mat(char **mat);
 
 // texture.c
 void		extract_texture_value(t_game *cube);

@@ -4,7 +4,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c utils.c utils2.c key.c parser.c texture.c check.c map.c
+SRCS = main.c utils.c utils2.c utils3.c key.c parser.c texture.c check.c map.c
 
 LIBFT = ./libft/libft.a
 
