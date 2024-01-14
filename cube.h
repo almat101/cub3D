@@ -66,17 +66,48 @@ typedef	struct s_colors
 {
 	int		f_color_num;
 	int		c_color_num;
-	char	**floor_colors;
-	char	**ceiling_colors;
+	char	*floor_color;
+	char	*ceiling_color;
 	char	*f_hex_color;
 	char	*c_hex_color;
 }	t_colors;
+
+typedef struct s_xpm_img
+{
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_xpm_img;
+
+typedef struct s_cards
+{
+	t_xpm_img	north_wall;
+	t_xpm_img	south_wall;
+	t_xpm_img	east_wall;
+	t_xpm_img	west_wall;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	int			f_no;
+	int			f_so;
+	int			f_we;
+	int			f_ea;
+	int			c_no;
+	int			c_so;
+	int			c_we;
+	int			c_ea;
+}	t_cards;
 
 typedef	struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_colors	*colors;
+	t_colors	*colors; // floor and ceil
 	t_player	*player;
 	double		time;
 	double		oldTime;
@@ -87,13 +118,19 @@ typedef	struct s_game
 	char		**real_map;
 	int			map_width;
 	int			map_height;
-	char		*north_texture;
-	char		*south_texture;
-	char		*west_texture;
-	char		*east_texture;
-	char		*ceil_color_rgb;
-	char		*floor_color_rgb;
+	// char		*north_texture;
+	// char		*south_texture;
+	// char		*west_texture;
+	// char		*east_texture;
+	// char		*ceil_color_rgb;
+	// char		*floor_color_rgb;
+	t_cards		*cards; // texture no so ea we
+
 }	t_game;
+
+// init.c
+void		init_all(t_game *cube);
+void		free_all(t_game *cube);
 
 // parser.c
 void		parse_map(char **argv, t_game *cube);
@@ -112,10 +149,10 @@ void		set_color(t_data *data);
 
 //check.c
 void		check_card1(t_game *cube);
-void		check_card2(t_game *cube);
+void		check_colors(t_game *cube);
 
 // map.c
-void		extract_map(char **argv, t_game *cube);
+void		extract_real_map(t_game *cube);
 
 // key.c
 int			key_press(int key, t_game *cube);
@@ -129,20 +166,17 @@ int			close_window(t_game *cube);
 void		count_fps(t_game *cube);
 
 // utils2.c
-void		free_all_map(t_game *cube);
+void		print_map(char **map);
 void		free_texture(t_game *cube);
-void		print_all_map(t_game *cube);
-void		print_real_map(t_game *cube);
 void		free_list(t_list *lst);
-int			ft_exit(t_game *cube);
-
-// utils3.c
-void		free_real_map(t_game *cube);
 void		free_mat(char **mat);
 
-// texture.c
-void		extract_texture_value(t_game *cube);
-void		print_texture_value(t_game *cube);
+// utils3.c
 
+// parse_texture.c
+int			has_xpm_extension(const char *filename);
+void		extract_texture(t_game *cube);
+void		print_texture_value(t_game *cube);
+void		assign(t_game *cube, char **dest, const char *src, int *flag);
 
 #endif

@@ -13,25 +13,25 @@ int	main (int argc, char **argv)
 
 	if (argc == 2)
 	{
+		init_all(&cube);
 		parse_map(argv, &cube);
-		check_card1(&cube);
-		check_card2(&cube);
+		extract_texture(&cube);
+		extract_real_map(&cube);
 
-		printf("all map:\n");
-		print_all_map(&cube);
+		//check_card1(&cube); is redundant???????????
+		check_colors(&cube);
 
-		printf("now real map:\n");
-		extract_map(argv, &cube);
-		print_real_map(&cube);
 
-		printf("now texture:\n");
-		extract_texture_value(&cube);
-		print_texture_value(&cube);
-		free_all_map(&cube);
-		free_real_map(&cube);
-		free_texture(&cube);
+		print_map(cube.real_map);
+
+		//printf("now texture:\n");
+		//print_texture_value(&cube);
+		free_all(&cube);
 	}
 	else
 		printf("Error\nInvalid number of arguments\n");
 	return (0);
 }
+
+
+

@@ -1,56 +1,25 @@
 #include "cube.h"
 
-void	free_all_map(t_game *cube)
-{
-	int i;
-
-	i = 0;
-	while (cube->map[i] != NULL)
-		free(cube->map[i++]);
-	free(cube->map);
-}
-
 void	free_texture(t_game *cube)
 {
-	if ((cube->north_texture) != NULL)
-		free(cube->north_texture);
-	if ((cube->south_texture) != NULL)
-		free(cube->south_texture);
-	if ((cube->west_texture) != NULL)
-		free(cube->west_texture);
-	if ((cube->east_texture) != NULL)
-		free(cube->east_texture);
-	if ((cube->floor_color_rgb) != NULL)
-		free(cube->floor_color_rgb);
-	if ((cube->ceil_color_rgb) != NULL)
-		free(cube->ceil_color_rgb);
+	if ((cube->cards->no) != NULL)
+		free(cube->cards->no);
+	if ((cube->cards->so) != NULL)
+		free(cube->cards->so);
+	if ((cube->cards->we) != NULL)
+		free(cube->cards->we);
+	if ((cube->cards->ea) != NULL)
+		free(cube->cards->ea);
 }
 
-
-void	print_all_map(t_game *cube)
+void	print_map(char **map)
 {
 	int		i;
 
 	i = 0;
-	if (cube->map == NULL)
-		return ;
-	while (cube->map[i] != NULL)
+	while (map[i] != NULL)
 	{
-		printf("%s", cube->map[i]);
-		i++;
-	}
-}
-
-void	print_real_map(t_game *cube)
-{
-	int		i;
-
-	i = 0;
-	if (cube->real_map == NULL)
-		return ;
-	while (cube->real_map[i] != NULL)
-	{
-		printf("%s", cube->real_map[i]);
+		printf("%s", map[i]);
 		i++;
 	}
 }
@@ -66,10 +35,15 @@ void free_list(t_list *lst)
 		free(tmp);
 	}
 }
-
-int ft_exit(t_game *cube)
+void	free_mat(char **mat)
 {
-	free_all_map(cube);
-	free_texture(cube);
-	exit(0);
+	int i;
+
+	i = 0;
+	while (mat[i])
+	{
+		free(mat[i]);
+		i++;
+	}
+	free(mat);
 }
