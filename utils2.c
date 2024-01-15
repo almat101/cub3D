@@ -18,6 +18,10 @@ void free_colors(t_game *cube)
 		free(cube->colors->floor_color);
 	if ((cube->colors->ceil_color) != NULL)
 		free(cube->colors->ceil_color);
+	if ((cube->colors->f_hex_color) != NULL)
+		free(cube->colors->f_hex_color);
+	if ((cube->colors->c_hex_color) != NULL)
+		free(cube->colors->c_hex_color);
 }
 
 void	print_map(char **map)

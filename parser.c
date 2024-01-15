@@ -20,11 +20,12 @@ t_list	*read_file(int fd)
 	return (lst);
 }
 
-void check_empty_file(t_list *lst)
+void	check_empty_file(t_list *lst, t_game *cube)
 {
 	if (lst == NULL)
 	{
 		printf("Error\nEmpty map\n");
+		free_all(cube);
 		exit (1);
 	}
 }
@@ -77,7 +78,7 @@ void	parse_map(char **argv, t_game *cube)
 	fd = open(argv[1], O_RDONLY);
 	lst = read_file(fd);
 	close(fd);
-	check_empty_file(lst);
+	check_empty_file(lst, cube);
 	copy_all_map(lst, cube);
 	free_list(lst);
 }

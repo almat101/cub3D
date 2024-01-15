@@ -70,6 +70,10 @@ typedef	struct s_colors
 	char	*ceil_color;
 	char	*f_hex_color;
 	char	*c_hex_color;
+	char	**f_rgb_value;
+	char	**c_rgb_value;
+	int		f_hex_color_int;
+	int		c_hex_color_int;
 	int		f_floor;
 	int		f_ceil;
 }	t_colors;
@@ -137,7 +141,7 @@ void		free_all(t_game *cube);
 // parser.c
 void		parse_map(char **argv, t_game *cube);
 t_list		*read_file(int fd);
-void		check_empty_file(t_list *lst);
+void		check_empty_file(t_list *lst, t_game *cube);
 int			count_lines(t_list *lst);
 void		copy_all_map(t_list *lst, t_game *cube);
 
@@ -149,15 +153,32 @@ void		draw_vertical_line(t_game *cube, t_data *data, int x);
 void		render_map(t_game *cube);
 void		set_color(t_data *data);
 
-//check.c
-void		check_card1(t_game *cube);
-void		check_colors(t_game *cube);
+//check1.c
 void		extract_colors(t_game *cube);
 void		assign_colors(t_game *cube, char **dest, const char *src, int *flag);
+void		ft_rgb_err(t_game *cube, char *line, char **rgb_value);
+void		check_rgb(t_game *cube);
+void		check_valid_rgb(t_game *cube, char *line);
+
+//check2.c
+void		is_cube(char *argv);
+void		check_player(t_game *cube);
+void		check_map(t_game *cube);
+void		check_flmap(t_game *cube);
+
+//color.c
+int		ft_rgb(int r, int g, int b);
+void	convert_color(t_game *cube, char *line, int is_floor);
+char	*to_hex(int decimal);
+void	rgb_to_hex(t_game *cube);
 
 // map.c
 void		extract_real_map(t_game *cube);
-
+void		replace_tabs_in_real_map(char ***real_map, int num_lines);
+int 		ft_strlen_row(char **map);
+void		check_map(t_game *cube);
+char		*replace_tabs_with_spaces(const char *str, int tab_count);
+void		fill_map_with_zero(char ***real_map, int num_lines);
 // key.c
 int			key_press(int key, t_game *cube);
 int			key_release(int key, t_game *cube);
@@ -178,6 +199,8 @@ void 		free_colors(t_game *cube);
 
 // utils3.c
 void		print_colors_value(t_game *cube);
+void		print_hexa_color(t_game *cube);
+void		free_err(t_game *cube, char *s);
 
 // parse_texture.c
 int			has_xpm_extension(const char *filename);

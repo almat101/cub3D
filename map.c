@@ -294,33 +294,29 @@
 
 void add_to_real_map(char *line, t_game *cube)
 {
-	int old_size = 0;
-	if (cube->real_map)
-	{
-		while (cube->real_map[old_size] != NULL)
-		{
-			old_size++;
-		}
-	}
+	int		old_size;
+	char	**new_real_map;
+	int		new_size;
 
-	int new_size = old_size + 1;
-	char **new_real_map = ft_realloc(cube->real_map, (old_size + 1) * sizeof(char *), (new_size + 1) * sizeof(char *));
-
+	old_size = 0;
+	while (cube->real_map && cube->real_map[old_size] != NULL)
+		old_size++;
+	new_size = old_size + 1;
+	new_real_map = ft_realloc(cube->real_map, (old_size + 1) * sizeof(char *),
+	 (new_size + 1) * sizeof(char *));
 	if (new_real_map == NULL)
 	{
 		printf("Error\nFailed to allocate memory for real map\n");
 		exit(1);
 	}
-
 	cube->real_map = new_real_map;
 	cube->real_map[old_size] = ft_strdup(line);
-
 	if (cube->real_map[old_size] == NULL)
 	{
 		printf("Error\nFailed to allocate memory for real map line\n");
 		exit(1);
 	}
-	cube->real_map[new_size] = NULL; // Add this line to indicate the end of the real_map
+	cube->real_map[new_size] = NULL;
 }
 
 
@@ -331,7 +327,6 @@ void	extract_real_map(t_game *cube)
 	i = 0;
 	while (cube->map[i] != NULL)
 	{
-		// jump the texture and color lines
 		if (ft_strncmp(cube->map[i], "NO ", 3) == 0 ||
 			ft_strncmp(cube->map[i], "SO ", 3) == 0 ||
 			ft_strncmp(cube->map[i], "WE ", 3) == 0 ||
@@ -343,8 +338,96 @@ void	extract_real_map(t_game *cube)
 			i++;
 			continue ;
 		}
-		//printf("cube->map[i]: %s", cube->map[i]);
 		add_to_real_map(cube->map[i], cube);
+		i++;
+	}
+	cube->map_height = ft_strlen_row(cube->real_map);
+}
+
+int count_tab(char *line)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == '\t')
+			count++;
+		else
+			i++;
+	}
+	return (count);
+}
+char *replace_tabs_with_spaces(const char *str, int tab_count)
+{
+	char	*new_str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_str = malloc(ft_strlen(str) + (tab_count * 3) + 1);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\t')
+		{
+			new_str[j++] = ' ';
+			new_str[j++] = ' ';
+			new_str[j++] = ' ';
+			new_str[j++] = ' ';
+		}
+		else
+		{
+			new_str[j++] = str[i];
+		}
+		i++;
+	}
+	new_str[j] = '\0';
+	//free(str);
+	return new_str;
+}
+
+
+int ft_strlen_row(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i] != NULL)
+	{
+		i++;
+	}
+	return i;
+}
+
+void replace_tabs_in_real_map(char ***real_map, int num_lines)
+{
+	for (int i = 0; i < num_lines; i++)
+	{
+		char *new_line = replace_tabs_with_spaces((*real_map)[i],num_lines);
+		free((*real_map)[i]); // Free the old string
+		(*real_map)[i] = new_line; // Replace the old string with the new one
+	}
+}
+
+void	fill_map_with_zero(char ***real_map, int num_lines)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < num_lines)
+	{
+		j = 0;
+		while ((*real_map)[i][j] != '\0')
+		{
+			if ((*real_map)[i][j] == ' ')
+				(*real_map)[i][j] = '0';
+			j++;
+		}
 		i++;
 	}
 }

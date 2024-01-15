@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amatta <amatta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 11:35:49 by amatta            #+#    #+#             */
-/*   Updated: 2023/07/04 11:59:09 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/15 11:22:36 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,4 @@ int	ft_atoi(const char *str)
 	}
 	return (result * sign);
 }
+

@@ -39,6 +39,8 @@ void	init_all(t_game *cube)
 	cube->colors->f_ceil = 0;
 	cube->colors->floor_color = NULL;
 	cube->colors->ceil_color = NULL;
+	cube->colors->f_hex_color_int = 0;
+	cube->colors->c_hex_color_int = 0;
 
 }
 

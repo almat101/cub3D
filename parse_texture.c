@@ -36,7 +36,7 @@ void	assign(t_game *cube, char **dest, const char *src, int *flag)
 	}
 }
 
-// extract the texture path from the map
+// extract the texture path from the map and check if it is valid
 void extract_texture(t_game *cube)
 {
 	int i;
