@@ -18,14 +18,13 @@ int	main (int argc, char **argv)
 		extract_texture(&cube);
 		extract_real_map(&cube);
 
-		//check_card1(&cube); is redundant???????????
-		check_colors(&cube);
-
+		extract_colors(&cube);
+		//check_card1(&cube);  // is redundant???????????
+		//check_colors(&cube);
 
 		print_map(cube.real_map);
-
-		//printf("now texture:\n");
-		//print_texture_value(&cube);
+		print_texture_value(&cube);
+		print_colors_value(&cube);
 		free_all(&cube);
 	}
 	else

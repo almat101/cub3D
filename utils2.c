@@ -12,6 +12,14 @@ void	free_texture(t_game *cube)
 		free(cube->cards->ea);
 }
 
+void free_colors(t_game *cube)
+{
+	if ((cube->colors->floor_color) != NULL)
+		free(cube->colors->floor_color);
+	if ((cube->colors->ceil_color) != NULL)
+		free(cube->colors->ceil_color);
+}
+
 void	print_map(char **map)
 {
 	int		i;

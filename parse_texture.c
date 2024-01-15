@@ -16,7 +16,13 @@ int	has_xpm_extension(const char *filename)
 // assign the texture path to the corresponding variable
 void	assign(t_game *cube, char **dest, const char *src, int *flag)
 {
-	if (*flag == 0)
+	if (*flag == 1)
+	{
+		printf("Error\nDuplicate cardinal texture\n");
+		free_all(cube);
+		exit(1);
+	}
+	else if (*flag == 0)
 	{
 		if (!has_xpm_extension(src))
 		{
@@ -57,8 +63,6 @@ void extract_texture(t_game *cube)
 	}
 }
 
-
-
 void	print_texture_value(t_game *cube)
 {
 	printf("%s", cube->cards->no);
@@ -66,3 +70,4 @@ void	print_texture_value(t_game *cube)
 	printf("%s", cube->cards->we);
 	printf("%s", cube->cards->ea);
 }
+

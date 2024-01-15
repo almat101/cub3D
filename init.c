@@ -35,6 +35,11 @@ void	init_all(t_game *cube)
 	cube->cards->c_so = 0;
 	cube->cards->c_we = 0;
 	cube->cards->c_ea = 0;
+	cube->colors->f_floor = 0;
+	cube->colors->f_ceil = 0;
+	cube->colors->floor_color = NULL;
+	cube->colors->ceil_color = NULL;
+
 }
 
 void	free_all(t_game *cube)
@@ -44,6 +49,7 @@ void	free_all(t_game *cube)
 	if (cube->real_map)
 		free_mat(cube->real_map);
 	free_texture(cube);
+	free_colors(cube);
 	free(cube->player);
 	free(cube->colors);
 	free(cube->img);

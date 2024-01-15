@@ -67,9 +67,11 @@ typedef	struct s_colors
 	int		f_color_num;
 	int		c_color_num;
 	char	*floor_color;
-	char	*ceiling_color;
+	char	*ceil_color;
 	char	*f_hex_color;
 	char	*c_hex_color;
+	int		f_floor;
+	int		f_ceil;
 }	t_colors;
 
 typedef struct s_xpm_img
@@ -150,6 +152,8 @@ void		set_color(t_data *data);
 //check.c
 void		check_card1(t_game *cube);
 void		check_colors(t_game *cube);
+void		extract_colors(t_game *cube);
+void		assign_colors(t_game *cube, char **dest, const char *src, int *flag);
 
 // map.c
 void		extract_real_map(t_game *cube);
@@ -170,8 +174,10 @@ void		print_map(char **map);
 void		free_texture(t_game *cube);
 void		free_list(t_list *lst);
 void		free_mat(char **mat);
+void 		free_colors(t_game *cube);
 
 // utils3.c
+void		print_colors_value(t_game *cube);
 
 // parse_texture.c
 int			has_xpm_extension(const char *filename);
