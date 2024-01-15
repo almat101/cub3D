@@ -19,8 +19,6 @@ void	init_all(t_game *cube)
 	cube->player->cam_dir = 0;
 	cube->time = 0;
 	cube->oldTime = 0;
-	cube->colors->c_color_num = 0;
-	cube->colors->f_color_num = 0;
 	cube->map_width = 0;
 	cube->map_height = 0;
 	cube->cards->no = NULL;
@@ -31,16 +29,12 @@ void	init_all(t_game *cube)
 	cube->cards->f_so = 0;
 	cube->cards->f_we = 0;
 	cube->cards->f_ea = 0;
-	cube->cards->c_no = 0;
-	cube->cards->c_so = 0;
-	cube->cards->c_we = 0;
-	cube->cards->c_ea = 0;
 	cube->colors->f_floor = 0;
-	cube->colors->f_ceil = 0;
+	cube->colors->c_ceil = 0;
 	cube->colors->floor_color = NULL;
 	cube->colors->ceil_color = NULL;
-	cube->colors->f_hex_color_int = 0;
-	cube->colors->c_hex_color_int = 0;
+	cube->colors->f_hex_color = NULL;
+	cube->colors->c_hex_color = NULL;
 
 }
 

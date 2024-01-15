@@ -33,9 +33,9 @@ int	main (int argc, char **argv)
 		check_flmap(&cube);
 		check_map(&cube);
 		print_map(cube.real_map);
-		//print_texture_value(&cube);
-		//print_colors_value(&cube);
-		//print_hexa_color(&cube);
+		print_texture_value(&cube);
+		print_colors_value(&cube);
+		print_hexa_color(&cube);
 		free_all(&cube);
 	}
 	else

@@ -64,18 +64,12 @@ typedef struct s_data
 
 typedef	struct s_colors
 {
-	int		f_color_num;
-	int		c_color_num;
+	int		f_floor;
+	int		c_ceil;
 	char	*floor_color;
 	char	*ceil_color;
 	char	*f_hex_color;
 	char	*c_hex_color;
-	char	**f_rgb_value;
-	char	**c_rgb_value;
-	int		f_hex_color_int;
-	int		c_hex_color_int;
-	int		f_floor;
-	int		f_ceil;
 }	t_colors;
 
 typedef struct s_xpm_img
@@ -103,10 +97,6 @@ typedef struct s_cards
 	int			f_so;
 	int			f_we;
 	int			f_ea;
-	int			c_no;
-	int			c_so;
-	int			c_we;
-	int			c_ea;
 }	t_cards;
 
 typedef	struct s_game

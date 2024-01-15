@@ -19,9 +19,9 @@ void convert_color(t_game *cube, char *line, int is_floor)
 	value[1] = ft_atoi_rgb(rgb_values[1]);
 	value[2] = ft_atoi_rgb(rgb_values[2]);
 	if (is_floor)
-		cube->colors->f_color_num = ft_rgb(value[0], value[1], value[2]);
+		cube->colors->f_floor = ft_rgb(value[0], value[1], value[2]);
 	else
-		cube->colors->c_color_num = ft_rgb(value[0], value[1], value[2]);
+		cube->colors->c_ceil= ft_rgb(value[0], value[1], value[2]);
 
 	free_mat(rgb_values);
 }
@@ -61,12 +61,12 @@ void rgb_to_hex(t_game *cube)
 		if (ft_strncmp(cube->map[i], "F ", 2) == 0)
 		{
 			convert_color(cube, cube->map[i], 1);
-			cube->colors->f_hex_color = to_hex(cube->colors->f_color_num);
+			cube->colors->f_hex_color = to_hex(cube->colors->f_floor);
 		}
 		else if (ft_strncmp(cube->map[i], "C ", 2) == 0)
 		{
 			convert_color(cube, cube->map[i], 0);
-			cube->colors->c_hex_color = to_hex(cube->colors->c_color_num);
+			cube->colors->c_hex_color = to_hex(cube->colors->c_ceil);
 		}
 		i++;
 	}

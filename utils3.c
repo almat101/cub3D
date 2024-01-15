@@ -2,8 +2,8 @@
 
 void	print_colors_value(t_game *cube)
 {
-	printf("floor color int: %d", cube->colors->f_color_num);
-	printf("ceil colorint: %d", cube->colors->f_floor);
+	printf("floor color int: %d\n", cube->colors->f_floor);
+	printf("ceil color int: %d\n", cube->colors->c_ceil);
 }
 void	print_hexa_color(t_game *cube)
 {

@@ -11,10 +11,10 @@ void extract_colors(t_game *cube)
 		if (ft_strncmp(cube->map[i], "F ", 2) == 0)
 			assign_colors(cube, &cube->colors->floor_color, cube->map[i] + 2, &cube->colors->f_floor);
 		else if (ft_strncmp(cube->map[i], "C ", 2) == 0)
-			assign_colors(cube, &cube->colors->ceil_color, cube->map[i] + 2, &cube->colors->f_ceil);
+			assign_colors(cube, &cube->colors->ceil_color, cube->map[i] + 2, &cube->colors->c_ceil);
 		i++;
 	}
-	if (cube->colors->f_floor == 0 || cube->colors->f_ceil == 0)
+	if (cube->colors->f_floor == 0 || cube->colors->c_ceil == 0)
 	{
 		printf("Error\nMissing colors\n");
 		free_all(cube);
