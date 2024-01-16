@@ -1,12 +1,5 @@
 #include "cube.h"
 
-/*
-controllare i bordi se non sono presenti 0
-controllare se non ci sono spazi dove sono presenti i 0, per esempio tra 10 e 01 e 00 uno spazio in mezzo
-oppure sostituire i spazi con 0 e i tab con 4 zeri
-se trovo newline in getnextline e dopo trovo la mappa e errore
-*/
-
 int	main (int argc, char **argv)
 {
 	t_game	cube;
@@ -34,7 +27,7 @@ int	main (int argc, char **argv)
 		check_map(&cube);
 		print_map(cube.real_map);
 		print_texture_value(&cube);
-		print_colors_value(&cube);
+		//print_colors_value(&cube);
 		print_hexa_color(&cube);
 		free_all(&cube);
 	}

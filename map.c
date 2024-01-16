@@ -298,6 +298,8 @@ void add_to_real_map(char *line, t_game *cube)
 	char	**new_real_map;
 	int		new_size;
 
+	if (!line)
+		free_err(cube,"Error\nEmpty line in map\n");
 	old_size = 0;
 	while (cube->real_map && cube->real_map[old_size] != NULL)
 		old_size++;
@@ -336,6 +338,8 @@ void	extract_real_map(t_game *cube)
 			ft_strncmp(cube->map[i], "\n", 1) == 0)
 		{
 			i++;
+			if (cube->map[i] == NULL)
+				free_err(cube, "Error\nno Map\n");
 			continue ;
 		}
 		add_to_real_map(cube->map[i], cube);
@@ -404,11 +408,16 @@ int ft_strlen_row(char **map)
 
 void replace_tabs_in_real_map(char ***real_map, int num_lines)
 {
-	for (int i = 0; i < num_lines; i++)
+	int		i;
+	char	*new_line;
+
+	i = 0;
+	while (i < num_lines)
 	{
-		char *new_line = replace_tabs_with_spaces((*real_map)[i],num_lines);
+		new_line = replace_tabs_with_spaces((*real_map)[i],num_lines);
 		free((*real_map)[i]); // Free the old string
 		(*real_map)[i] = new_line; // Replace the old string with the new one
+		i++;
 	}
 }
 
