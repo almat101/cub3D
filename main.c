@@ -22,8 +22,11 @@ int	main (int argc, char **argv)
 		//check_card1(&cube);  // is redundant???????????
 		//check_colors(&cube);
 		replace_tabs_in_real_map(&cube.real_map, cube.map_height);
-		print_map(cube.real_map);
 		check_symbols(&cube);
+		save_player(&cube);
+
+		print_map(cube.real_map);
+		printf_player(&cube);
 		check_player(&cube);
 		check_flmap(&cube);
 		check_map(&cube);

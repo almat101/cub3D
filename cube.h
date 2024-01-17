@@ -196,6 +196,11 @@ void		print_hexa_color(t_game *cube);
 void		free_err(t_game *cube, char *s);
 void		print_texture_value(t_game *cube);
 
+//utils4.c
+void		save_player(t_game *cube);
+int			is_player(char c);
+void		printf_player(t_game *cube);
+
 // parse_texture.c
 int			has_xpm_extension(const char *filename);
 void		extract_texture(t_game *cube);
