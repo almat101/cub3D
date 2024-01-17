@@ -10,6 +10,14 @@ void	print_hexa_color(t_game *cube)
 	printf("floor hexa color: %s\n", cube->colors->f_hex_color);
 	printf("ceil hexa color: %s\n", cube->colors->c_hex_color);
 }
+
+void	print_texture_value(t_game *cube)
+{
+	printf("%s", cube->cards->no);
+	printf("%s", cube->cards->so);
+	printf("%s", cube->cards->we);
+	printf("%s", cube->cards->ea);
+}
 void	free_err(t_game *cube, char *s)
 {
 	free_all(cube);

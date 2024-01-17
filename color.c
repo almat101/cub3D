@@ -1,11 +1,11 @@
 #include "cube.h"
 
-// convert an rgb in an unisigned int
 int ft_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
+// convert rgb value to an int hexadecimal value
 void convert_color(t_game *cube, char *line, int is_floor)
 {
 	char	**rgb_values;
@@ -26,6 +26,7 @@ void convert_color(t_game *cube, char *line, int is_floor)
 	free_mat(rgb_values);
 }
 
+//rgb to hexadecimal
 char	*to_hex(int decimal)
 {
 	int		i;
@@ -50,7 +51,7 @@ char	*to_hex(int decimal)
 	return (hexa_number);
 }
 
-
+// convert rgb of F and C to a hexadecimal string
 void rgb_to_hex(t_game *cube)
 {
 	int i;

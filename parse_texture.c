@@ -63,11 +63,5 @@ void extract_texture(t_game *cube)
 	}
 }
 
-void	print_texture_value(t_game *cube)
-{
-	printf("%s", cube->cards->no);
-	printf("%s", cube->cards->so);
-	printf("%s", cube->cards->we);
-	printf("%s", cube->cards->ea);
-}
+
 

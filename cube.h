@@ -155,12 +155,13 @@ void		is_cube(char *argv);
 void		check_player(t_game *cube);
 void		check_map(t_game *cube);
 void		check_flmap(t_game *cube);
+void		check_symbols(t_game *cube);
 
 //color.c
-int		ft_rgb(int r, int g, int b);
-void	convert_color(t_game *cube, char *line, int is_floor);
-char	*to_hex(int decimal);
-void	rgb_to_hex(t_game *cube);
+int			ft_rgb(int r, int g, int b);
+void		convert_color(t_game *cube, char *line, int is_floor);
+char		*to_hex(int decimal);
+void		rgb_to_hex(t_game *cube);
 
 // map.c
 void		extract_real_map(t_game *cube);
@@ -169,6 +170,8 @@ int 		ft_strlen_row(char **map);
 void		check_map(t_game *cube);
 char		*replace_tabs_with_spaces(const char *str, int tab_count);
 void		fill_map_with_zero(char ***real_map, int num_lines);
+void		check_real_map(t_game *cube);
+
 // key.c
 int			key_press(int key, t_game *cube);
 int			key_release(int key, t_game *cube);
@@ -191,11 +194,11 @@ void 		free_colors(t_game *cube);
 void		print_colors_value(t_game *cube);
 void		print_hexa_color(t_game *cube);
 void		free_err(t_game *cube, char *s);
+void		print_texture_value(t_game *cube);
 
 // parse_texture.c
 int			has_xpm_extension(const char *filename);
 void		extract_texture(t_game *cube);
-void		print_texture_value(t_game *cube);
 void		assign(t_game *cube, char **dest, const char *src, int *flag);
 
 #endif

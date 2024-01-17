@@ -338,8 +338,8 @@ void	extract_real_map(t_game *cube)
 			ft_strncmp(cube->map[i], "\n", 1) == 0)
 		{
 			i++;
-			if (cube->map[i] == NULL)
-				free_err(cube, "Error\nno Map\n");
+			// if (cube->map[i] == NULL)
+			// 	free_err(cube, "Error\nno Map\n");
 			continue ;
 		}
 		add_to_real_map(cube->map[i], cube);
@@ -347,6 +347,35 @@ void	extract_real_map(t_game *cube)
 	}
 	cube->map_height = ft_strlen_row(cube->real_map);
 }
+
+
+void	check_real_map(t_game *cube)
+{
+	int		i;
+	int		is_map;
+
+	is_map = 0;
+	i = 0;
+	while (cube->map[i] != NULL)
+	{
+		if (ft_strncmp(cube->map[i], "NO ", 3) == 0 ||
+			ft_strncmp(cube->map[i], "SO ", 3) == 0 ||
+			ft_strncmp(cube->map[i], "WE ", 3) == 0 ||
+			ft_strncmp(cube->map[i], "EA ", 3) == 0 ||
+			ft_strncmp(cube->map[i], "F ", 2) == 0 ||
+			ft_strncmp(cube->map[i], "C ", 2) == 0 ||
+			ft_strncmp(cube->map[i], "\n", 1) == 0)
+		{
+			i++;
+			if (cube->map[i] == NULL && !is_map)
+				free_err(cube, "Error\nNo Map after texture and colors\n");
+			continue ;
+		}
+		is_map = 1;
+		i++;
+	}
+}
+
 
 int count_tab(char *line)
 {

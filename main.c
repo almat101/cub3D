@@ -10,25 +10,26 @@ int	main (int argc, char **argv)
 		init_all(&cube);
 
 		parse_map(argv, &cube);
-		extract_texture(&cube);
-		extract_real_map(&cube);
 		extract_colors(&cube);
+		extract_texture(&cube);
+		check_real_map(&cube);
+		extract_real_map(&cube);
 		// check for valid rgb values
 		check_rgb(&cube);
 		rgb_to_hex(&cube);
-
 		//fill map with 0
 		//fill_map_with_zero(&cube.real_map, cube.map_height);
 		//check_card1(&cube);  // is redundant???????????
 		//check_colors(&cube);
 		replace_tabs_in_real_map(&cube.real_map, cube.map_height);
+		print_map(cube.real_map);
+		check_symbols(&cube);
 		check_player(&cube);
 		check_flmap(&cube);
 		check_map(&cube);
-		print_map(cube.real_map);
-		print_texture_value(&cube);
+		//print_texture_value(&cube);
 		//print_colors_value(&cube);
-		print_hexa_color(&cube);
+		//print_hexa_color(&cube);
 		free_all(&cube);
 	}
 	else
