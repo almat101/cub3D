@@ -22,10 +22,10 @@ void	print_colors_value(t_game *cube)
 
 void	print_texture_value(t_game *cube)
 {
-	printf("%s", cube->card->no);
-	printf("%s", cube->card->so);
-	printf("%s", cube->card->we);
-	printf("%s", cube->card->ea);
+	printf("%s\n", cube->card->no);
+	printf("%s\n", cube->card->so);
+	printf("%s\n", cube->card->we);
+	printf("%s\n", cube->card->ea);
 }
 
 void	printf_player(t_game *cube)

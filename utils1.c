@@ -44,6 +44,7 @@ void	count_fps(t_game *cube)
 	number = ft_itoa(cube->fps);
 	mlx_string_put(cube->mlx, cube->mlx_win,
 		SCREENWIDTH - 50, 20, -1, number);
+	free(number);
 }
 
 void	free_err(t_game *cube, char *s)

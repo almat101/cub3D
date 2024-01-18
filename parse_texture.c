@@ -16,6 +16,9 @@ int	has_xpm_extension(const char *filename)
 // assign the texture path to the corresponding variable
 void	assign(t_game *cube, char **dest, char *src, int *flag)
 {
+	int src_len;
+
+	src_len = ft_strlen(src) - 1;
 	if (*flag == 1)
 	{
 		printf("Error\nDuplicate cardinal texture\n");
@@ -31,7 +34,7 @@ void	assign(t_game *cube, char **dest, char *src, int *flag)
 			free_all(cube);
 			exit(1);
 		}
-		*dest = ft_strdup(src);
+		*dest = ft_strndup(src,src_len);
 		*flag = 1;
 	}
 }

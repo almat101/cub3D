@@ -200,6 +200,7 @@ void		printf_player(t_game *cube);
 // utils3.c
 int			is_player(char c);
 void		save_player(t_game *cube);
+void		fix_texture_color(t_game *cube);
 
 //utils4.c
 int			ft_strlen_row(char **map);

@@ -201,7 +201,7 @@ void	render_map(t_game *cube)
 	int		x;
 
 	x = 0;
-	load_all_texture(cube);
+	//load_all_texture(cube);
 	while (x < SCREENWIDTH)
 	{
 		init_data(&data, cube, x);
@@ -331,7 +331,7 @@ int	game_loop(t_game *cube)
 	update_rotation(cube);
 	return (0);
 }
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game		*cube;
 
@@ -341,11 +341,26 @@ int main(int argc, char **argv)
 		cube = ft_calloc(1, sizeof(t_game));
 		is_cube(argv[1]);
 		init_all(cube);
+
+		parse_map(argv, cube);
+		extract_colors(cube);
+		extract_texture(cube);
+		check_real_map(cube);
+		extract_real_map(cube);
+		check_rgb(cube);
+		rgb_to_hex(cube);
+		replace_tabs_in_real_map(&cube->real_map, cube->map_height);
+		check_symbols(cube);
+		//save_player(cube);
+		printf_player(cube);
+		print_colors_value(cube);
+		print_texture_value(cube);
 		cube->mlx = mlx_init();
 		cube->mlx_win = mlx_new_window(cube->mlx, SCREENWIDTH, SCREENHEIGHT, "Cub3D");
 		cube->img->img = mlx_new_image(cube->mlx, SCREENWIDTH, SCREENHEIGHT);
 		cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bpp, &cube->img->line_length, &cube->img->endian);
 		mlx_hooks(cube);
+		load_all_texture(cube);
 		mlx_loop_hook(cube->mlx, game_loop, cube);
 		mlx_loop(cube->mlx);
 		free_all(cube);

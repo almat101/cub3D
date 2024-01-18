@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:54 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/15 11:32:32 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/18 17:14:07 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ char	*get_next_line(int fd);
 int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int		ft_atoi_rgb(const char *str);
+char	*ft_strndup(const char *s, size_t n);
 
 #endif

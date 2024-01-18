@@ -25,6 +25,9 @@ void extract_colors(t_game *cube)
 // check if the color values are valid and assign them with strdup
 void	assign_colors(t_game *cube, char **dest, const char *src, int *flag)
 {
+	int src_len;
+
+	src_len = ft_strlen(src) - 1;
 	if (*flag == 1)
 	{
 		printf("Error\nDuplicate color\n");
@@ -33,7 +36,7 @@ void	assign_colors(t_game *cube, char **dest, const char *src, int *flag)
 	}
 	else if (*flag == 0)
 	{
-		*dest = ft_strdup(src);
+		*dest = ft_strndup(src, src_len);
 		*flag = 1;
 	}
 }

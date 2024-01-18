@@ -3,7 +3,7 @@
 void	load_texture_NO_SO(t_game *cube)
 {
 	cube->card->north_wall.img = mlx_xpm_file_to_image(cube->mlx,
-			"./texture/colorstone.xpm",
+			cube->card->no,
 			&cube->card->north_wall.width, &cube->card->north_wall.height);
 	if(!cube->card->north_wall.img)
 		free_err(cube, "Error\nNorth wall doesn't load\n");
@@ -11,7 +11,7 @@ void	load_texture_NO_SO(t_game *cube)
 			&cube->card->north_wall.bpp, &cube->card->north_wall.line_length,
 			&cube->card->north_wall.endian);
 	cube->card->south_wall.img = mlx_xpm_file_to_image(cube->mlx,
-			"./texture/eagle.xpm",
+			cube->card->so,
 			&cube->card->south_wall.width, &cube->card->south_wall.height);
 	if(!cube->card->south_wall.img)
 		free_err(cube, "Error\nsouth wall doesn't load\n");
@@ -23,7 +23,7 @@ void	load_texture_NO_SO(t_game *cube)
 void	load_texute_EA_WE(t_game *cube)
 {
 	cube->card->east_wall.img = mlx_xpm_file_to_image(cube->mlx,
-			"./texture/purplestone.xpm",
+			cube->card->ea,
 			&cube->card->east_wall.width, &cube->card->east_wall.height);
 	if(!cube->card->east_wall.img)
 		free_err(cube, "Error\neast wall doesn't load\n");
@@ -31,7 +31,7 @@ void	load_texute_EA_WE(t_game *cube)
 			&cube->card->east_wall.bpp, &cube->card->east_wall.line_length,
 			&cube->card->east_wall.endian);
 	cube->card->west_wall.img = mlx_xpm_file_to_image(cube->mlx,
-			"./texture/wood.xpm",
+			cube->card->we,
 			&cube->card->west_wall.width, &cube->card->west_wall.height);
 	if(!cube->card->west_wall.img)
 		free_err(cube, "Error\nwest wall doesn't load\n");
