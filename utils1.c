@@ -26,14 +26,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	close_window(t_game *cube)
-{
-	mlx_destroy_window(cube->mlx, cube->mlx_win);
-	mlx_destroy_image(cube->mlx, cube->img->img);
-	free(cube->mlx);
-	exit (1);
-}
-
 void	count_fps(t_game *cube)
 {
 	char *number;
@@ -51,5 +43,13 @@ void	count_fps(t_game *cube)
 	}
 	number = ft_itoa(cube->fps);
 	mlx_string_put(cube->mlx, cube->mlx_win,
-		SCREENHEIGHT - 50, 20, -1, number);
+		SCREENWIDTH - 50, 20, -1, number);
+}
+
+void	free_err(t_game *cube, char *s)
+{
+	free_all(cube);
+	while (*s)
+		write(2, s++, 1);
+	exit(1);
 }

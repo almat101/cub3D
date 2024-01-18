@@ -1,25 +1,29 @@
 #include "cube.h"
 
-void	print_colors_value(t_game *cube)
+void	save_player(t_game *cube)
 {
-	printf("floor color int: %d\n", cube->colors->f_floor);
-	printf("ceil color int: %d\n", cube->colors->c_ceil);
-	printf("floor hexa color: %s\n", cube->colors->f_hex_color);
-	printf("ceil hexa color: %s\n", cube->colors->c_hex_color);
+	int	i;
+	int	j;
+
+	i = 0;
+	while(cube->real_map[i] != NULL)
+	{
+		j = 0;
+		while (cube->real_map[i][j] != '\0')
+		{
+			if (is_player(cube->real_map[i][j]))
+			{
+				cube->player->posX = i;
+				cube->player->posY = j;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
-
-void	print_texture_value(t_game *cube)
+int is_player(char c)
 {
-	printf("%s", cube->card->no);
-	printf("%s", cube->card->so);
-	printf("%s", cube->card->we);
-	printf("%s", cube->card->ea);
-}
-void	free_err(t_game *cube, char *s)
-{
-	free_all(cube);
-	while (*s)
-		write(2, s++, 1);
-	exit(1);
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }

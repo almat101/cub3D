@@ -110,14 +110,36 @@ void	set_color(t_data *data, t_game *cube, int shift)
 		else
 			data->color = *(unsigned int *)(cube->card->west_wall.addr + shift);
 	}
-
 }
 
-void	draw_vertical_line(t_data *data, t_game *cube, int x)
+void	setTexWH(t_data *data, t_game *cube)
 {
-	int i;
+	if (data->side == 1)
+	{
+		if (data->rayDirY > 0)
+		{
+			data->texWidth = cube->card->north_wall.width;
+			data->texHeight = cube->card->north_wall.height;
+			return ;
+		}
+		data->texWidth = cube->card->south_wall.width;
+		data->texHeight = cube->card->south_wall.height;
+	}
+	else
+	{
+		if (data->rayDirX > 0)
+		{
+			data->texWidth = cube->card->east_wall.width;
+			data->texHeight = cube->card->east_wall.height;
+			return ;
+		}
+		data->texWidth = cube->card->west_wall.width;
+		data->texHeight = cube->card->west_wall.height;
+	}
+}
 
-	i = 0;
+void	wallPosRayPosOnWall(t_data *data, t_game *cube)
+{
 	if (data->side == 0)
 		data->perpWallDist = (data->sideDistX - data->deltaDistX);
 	else
@@ -129,64 +151,45 @@ void	draw_vertical_line(t_data *data, t_game *cube, int x)
 	data->drawEnd = data->lineHeight / 2 + SCREENHEIGHT / 2;
 	if (data->drawEnd >= SCREENHEIGHT)
 		data->drawEnd = SCREENHEIGHT - 1;
-	double	wallX;
 	if (data->side == 0)
-		wallX = cube->player->posY + data->perpWallDist * data->rayDirY;
+		data->wallX = cube->player->posY + data->perpWallDist * data->rayDirY;
 	else
-		wallX = cube->player->posX + data->perpWallDist * data->rayDirX;
-	wallX -= (int)(wallX);
-	int texWidth;
-	int texHeight;
-	if (data->side == 1)
-	{
-		//nord
-		if (data->rayDirY > 0)
-		{
-			texWidth = cube->card->north_wall.width;
-			texHeight = cube->card->north_wall.height;
-		}
-		//sud
-		else
-		{
-			texWidth = cube->card->south_wall.width;
-			texHeight = cube->card->south_wall.height;
-		}
-
-	}
-	else
-	{
-		//est
-		if (data->rayDirX > 0)
-		{
-			texWidth = cube->card->east_wall.width;
-			texHeight = cube->card->east_wall.height;
-		}
-		//ovest
-		else
-		{
-			texWidth = cube->card->west_wall.width;
-			texHeight = cube->card->west_wall.height;
-		}
-	}
-	//x coordinate on the texture
-	int texX = (int)(wallX * (double)texWidth);
+		data->wallX = cube->player->posX + data->perpWallDist * data->rayDirX;
+	data->wallX -= (int)(data->wallX);
+	setTexWH(data, cube);
+	data->texX = (int)(data->wallX * (double)data->texWidth);
 	if(data->side == 0 && data->rayDirX > 0)
-		texX = texWidth - texX - 1;
+		data->texX = data->texWidth - data->texX - 1;
 	if(data->side == 1 && data->rayDirY < 0)
-		texX = texWidth - texX - 1;
+		data->texX = data->texWidth - data->texX - 1;
+}
+
+
+void	drawTextWall(t_data *data, t_game *cube, int x)
+{
+	int	y;
+
+	data->step = 1.0 * data->texHeight / data->lineHeight;
+	data->texPos = (data->drawStart - SCREENHEIGHT / 2 + data->lineHeight / 2) * data->step;
+	y = data->drawStart;
+	while(y < data->drawEnd)
+	{
+		data->texY = (int)data->texPos % data->texHeight;
+		data->texPos += data->step;
+		set_color(data, cube, 4 * (int)(data->texHeight * data->texY + data->texX));
+		my_mlx_pixel_put(cube->img, x, y++, data->color);
+	}
+}
+
+void	draw_vertical_line(t_data *data, t_game *cube, int x)
+{
+	int	i;
+
+	i = 0;
+	wallPosRayPosOnWall(data, cube);
 	while (i < data->drawStart)
 		my_mlx_pixel_put(cube->img, x, i++, 0xFF00FFFF);
-
-	double step = 1.0 * texHeight / data->lineHeight;
-	double texPos = (data->drawStart - SCREENHEIGHT / 2 + data->lineHeight / 2) * step;
-	for(int y = data->drawStart; y < data->drawEnd; y++)
-	{
-		int texY = (int)texPos % texHeight;
-		texPos += step;
-		set_color(data, cube, 4 * (int)(texHeight * texY + texX));
-		my_mlx_pixel_put(cube->img, x, y, data->color);
-	}
-
+	drawTextWall(data, cube, x);
 	i = data->drawEnd;
 	while (i < SCREENHEIGHT)
 		my_mlx_pixel_put(cube->img, x, i++, 0xFFFFFFFF);
@@ -271,14 +274,16 @@ void	update_movement(t_game *cube)
 
 void	rotate_to_right(t_game *cube, double rotSpeed)
 {
+	double	oldDirX;
+	double	oldPlaneX;
 	// rotate to the right
 	if (cube->player->cam_dir == 1)
 	{
 		// both camera direction and camera plane must be rotated
-		double oldDirX = cube->player->dirX;
+		oldDirX = cube->player->dirX;
 		cube->player->dirX = cube->player->dirX * cos(-rotSpeed) - cube->player->dirY * sin(-rotSpeed);
 		cube->player->dirY = oldDirX * sin(-rotSpeed) + cube->player->dirY * cos(-rotSpeed);
-		double oldPlaneX = cube->player->planeX;
+		oldPlaneX = cube->player->planeX;
 		cube->player->planeX = cube->player->planeX * cos(-rotSpeed) - cube->player->planeY * sin(-rotSpeed);
 		cube->player->planeY = oldPlaneX * sin(-rotSpeed) + cube->player->planeY * cos(-rotSpeed);
 	}
@@ -286,14 +291,17 @@ void	rotate_to_right(t_game *cube, double rotSpeed)
 
 void	rotate_to_left(t_game *cube, double rotSpeed)
 {
+	double	oldDirX;
+	double	oldPlaneX;
+
 	// rotate to the left
 	if (cube->player->cam_dir == -1)
 	{
 		// both camera direction and camera plane must be rotated
-		double oldDirX = cube->player->dirX;
+		oldDirX = cube->player->dirX;
 		cube->player->dirX = cube->player->dirX * cos(rotSpeed) - cube->player->dirY * sin(rotSpeed);
 		cube->player->dirY = oldDirX * sin(rotSpeed) + cube->player->dirY * cos(rotSpeed);
-		double oldPlaneX = cube->player->planeX;
+		oldPlaneX = cube->player->planeX;
 		cube->player->planeX = cube->player->planeX * cos(rotSpeed) - cube->player->planeY * sin(rotSpeed);
 		cube->player->planeY = oldPlaneX * sin(rotSpeed) + cube->player->planeY * cos(rotSpeed);
 	}
@@ -325,7 +333,6 @@ int	game_loop(t_game *cube)
 }
 int main(int argc, char **argv)
 {
-
 	t_game		*cube;
 
 	(void)argv;
@@ -335,12 +342,13 @@ int main(int argc, char **argv)
 		is_cube(argv[1]);
 		init_all(cube);
 		cube->mlx = mlx_init();
-		cube->mlx_win = mlx_new_window(cube->mlx, SCREENHEIGHT, SCREENHEIGHT, "Cub3D");
+		cube->mlx_win = mlx_new_window(cube->mlx, SCREENWIDTH, SCREENHEIGHT, "Cub3D");
 		cube->img->img = mlx_new_image(cube->mlx, SCREENWIDTH, SCREENHEIGHT);
 		cube->img->addr = mlx_get_data_addr(cube->img->img, &cube->img->bpp, &cube->img->line_length, &cube->img->endian);
 		mlx_hooks(cube);
 		mlx_loop_hook(cube->mlx, game_loop, cube);
 		mlx_loop(cube->mlx);
+		free_all(cube);
 	}
 	else
 		write(2, "Error\nInvalid number of arguments\n", 34);

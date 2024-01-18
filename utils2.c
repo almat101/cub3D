@@ -1,29 +1,5 @@
 #include "cube.h"
 
-void	free_texture(t_game *cube)
-{
-	if ((cube->card->no) != NULL)
-		free(cube->card->no);
-	if ((cube->card->so) != NULL)
-		free(cube->card->so);
-	if ((cube->card->we) != NULL)
-		free(cube->card->we);
-	if ((cube->card->ea) != NULL)
-		free(cube->card->ea);
-}
-
-void free_colors(t_game *cube)
-{
-	if ((cube->colors->floor_color) != NULL)
-		free(cube->colors->floor_color);
-	if ((cube->colors->ceil_color) != NULL)
-		free(cube->colors->ceil_color);
-	if ((cube->colors->f_hex_color) != NULL)
-		free(cube->colors->f_hex_color);
-	if ((cube->colors->c_hex_color) != NULL)
-		free(cube->colors->c_hex_color);
-}
-
 void	print_map(char **map)
 {
 	int		i;
@@ -35,27 +11,26 @@ void	print_map(char **map)
 		i++;
 	}
 }
-
-void free_list(t_list *lst)
+void	print_colors_value(t_game *cube)
 {
-	t_list *tmp;
-
-	while (lst != NULL)
-	{
-		tmp = lst;
-		lst = lst->next;
-		free(tmp);
-	}
+	printf("floor color int: %d\n", cube->colors->f_floor);
+	printf("ceil color int: %d\n", cube->colors->c_ceil);
+	printf("floor hexa color: %s\n", cube->colors->f_hex_color);
+	printf("ceil hexa color: %s\n", cube->colors->c_hex_color);
 }
-void	free_mat(char **mat)
-{
-	int i;
 
-	i = 0;
-	while (mat[i])
-	{
-		free(mat[i]);
-		i++;
-	}
-	free(mat);
+
+void	print_texture_value(t_game *cube)
+{
+	printf("%s", cube->card->no);
+	printf("%s", cube->card->so);
+	printf("%s", cube->card->we);
+	printf("%s", cube->card->ea);
+}
+
+void	printf_player(t_game *cube)
+{
+	printf("Player position: %f %f\n", cube->player->posX, cube->player->posY);
+//	printf("Player direction: %f %f\n", cube->player->dirX, cube->player->dirY);
+//	printf("Player plane: %f %f\n", cube->player->planeX, cube->player->planeY);
 }

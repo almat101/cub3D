@@ -1,6 +1,5 @@
 #include "cube.h"
 
-
 void	load_texture_NO_SO(t_game *cube)
 {
 	cube->card->north_wall.img = mlx_xpm_file_to_image(cube->mlx,

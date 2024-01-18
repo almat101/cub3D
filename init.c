@@ -21,53 +21,32 @@ void	init_all(t_game *cube)
 	cube->oldTime = 0;
 	cube->map_width = 0;
 	cube->map_height = 0;
-	cube->card->no = NULL;
-	cube->card->so = NULL;
-	cube->card->ea = NULL;
-	cube->card->we = NULL;
+	// cube->card->no = NULL;
+	// cube->card->so = NULL;
+	// cube->card->ea = NULL;
+	// cube->card->we = NULL;
 	cube->card->n = 0;
 	cube->card->s = 0;
 	cube->card->e = 0;
 	cube->card->w = 0;
 	cube->colors->f_floor = 0;
 	cube->colors->c_ceil = 0;
-	cube->colors->floor_color = NULL;
-	cube->colors->ceil_color = NULL;
-	cube->colors->f_hex_color = NULL;
-	cube->colors->c_hex_color = NULL;
-
+	// cube->colors->floor_color = NULL;
+	// cube->colors->ceil_color = NULL;
+	// cube->colors->f_hex_color = NULL;
+	// cube->colors->c_hex_color = NULL;
 }
 
-void	free_all(t_game *cube)
+int	close_window(t_game *cube)
 {
-	if (cube->map)
-		free_mat(cube->map);
-	if (cube->real_map)
-		free_mat(cube->real_map);
-	free_texture(cube);
-	free_colors(cube);
-	free(cube->player);
-	free(cube->colors);
-	free(cube->img);
-	free(cube->card);
+	mlx_destroy_window(cube->mlx, cube->mlx_win);
+	mlx_destroy_image(cube->mlx, cube->img->img);
+	free(cube->mlx);
+	exit (1);
 }
 
-// void		*mlx;
-// 	void		*mlx_win;
-// 	t_colors	*colors;
-// 	t_player	*player;
-// 	double		time;
-// 	double		oldTime;
-// 	int			fps;
-// 	double		frameTime;
-// 	t_img 		*img;
-// 	char 		**map;
-// 	char		**real_map;
-// 	int			map_width;
-// 	int			map_height;
-// 	char		*north_texture;
-// 	char		*south_texture;
-// 	char		*west_texture;
-// 	char		*east_texture;
-// 	char		*ceil_color_rgb;
-// 	char		*floor_color_rgb;
+void	destroy_all(t_game *cube)
+{
+	mlx_destroy_window(cube->mlx, cube->mlx_win);
+	mlx_destroy_image(cube->mlx, cube->img->img);
+}
