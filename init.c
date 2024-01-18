@@ -5,15 +5,15 @@ void	init_all(t_game *cube)
 	cube->player = ft_calloc(1, sizeof(t_player));
 	cube->colors = ft_calloc(1, sizeof(t_colors));
 	cube->img = ft_calloc(1, sizeof(t_img));
-	cube->cards = ft_calloc(1, sizeof(t_cards));
+	cube->card = ft_calloc(1, sizeof(t_cards));
 	cube->real_map = NULL;
 	cube->map = NULL;
-	cube->player->posX = 0;
-	cube->player->posY = 0;
-	cube->player->dirX = 0;
+	cube->player->posX = 18;
+	cube->player->posY = 11;
+	cube->player->dirX = -1;
 	cube->player->dirY = 0;
 	cube->player->planeX = 0;
-	cube->player->planeY = 0;
+	cube->player->planeY = 0.66;
 	cube->player->mov_dirX = 0;
 	cube->player->mov_dirY = 0;
 	cube->player->cam_dir = 0;
@@ -21,14 +21,14 @@ void	init_all(t_game *cube)
 	cube->oldTime = 0;
 	cube->map_width = 0;
 	cube->map_height = 0;
-	cube->cards->no = NULL;
-	cube->cards->so = NULL;
-	cube->cards->ea = NULL;
-	cube->cards->we = NULL;
-	cube->cards->f_no = 0;
-	cube->cards->f_so = 0;
-	cube->cards->f_we = 0;
-	cube->cards->f_ea = 0;
+	cube->card->no = NULL;
+	cube->card->so = NULL;
+	cube->card->ea = NULL;
+	cube->card->we = NULL;
+	cube->card->n = 0;
+	cube->card->s = 0;
+	cube->card->e = 0;
+	cube->card->w = 0;
 	cube->colors->f_floor = 0;
 	cube->colors->c_ceil = 0;
 	cube->colors->floor_color = NULL;
@@ -49,7 +49,7 @@ void	free_all(t_game *cube)
 	free(cube->player);
 	free(cube->colors);
 	free(cube->img);
-	free(cube->cards);
+	free(cube->card);
 }
 
 // void		*mlx;

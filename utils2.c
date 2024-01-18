@@ -2,14 +2,14 @@
 
 void	free_texture(t_game *cube)
 {
-	if ((cube->cards->no) != NULL)
-		free(cube->cards->no);
-	if ((cube->cards->so) != NULL)
-		free(cube->cards->so);
-	if ((cube->cards->we) != NULL)
-		free(cube->cards->we);
-	if ((cube->cards->ea) != NULL)
-		free(cube->cards->ea);
+	if ((cube->card->no) != NULL)
+		free(cube->card->no);
+	if ((cube->card->so) != NULL)
+		free(cube->card->so);
+	if ((cube->card->we) != NULL)
+		free(cube->card->we);
+	if ((cube->card->ea) != NULL)
+		free(cube->card->ea);
 }
 
 void free_colors(t_game *cube)

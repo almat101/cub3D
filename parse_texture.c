@@ -14,7 +14,7 @@ int	has_xpm_extension(const char *filename)
 }
 
 // assign the texture path to the corresponding variable
-void	assign(t_game *cube, char **dest, const char *src, int *flag)
+void	assign(t_game *cube, char **dest, char *src, int *flag)
 {
 	if (*flag == 1)
 	{
@@ -45,17 +45,17 @@ void extract_texture(t_game *cube)
 	while (cube->map[i] != NULL)
 	{
 		if (ft_strncmp(cube->map[i], "NO ", 3) == 0)
-			assign(cube, &cube->cards->no, cube->map[i] + 3, &cube->cards->f_no);
+			assign(cube, &cube->card->no, cube->map[i] + 3, &cube->card->n);
 		else if (ft_strncmp(cube->map[i], "SO ", 3) == 0)
-			assign(cube, &cube->cards->so, cube->map[i] + 3, &cube->cards->f_so);
+			assign(cube, &cube->card->so, cube->map[i] + 3, &cube->card->s);
 		else if (ft_strncmp(cube->map[i], "WE ", 3) == 0)
-			assign(cube, &cube->cards->we, cube->map[i] + 3, &cube->cards->f_we);
+			assign(cube, &cube->card->we, cube->map[i] + 3, &cube->card->w);
 		else if (ft_strncmp(cube->map[i], "EA ", 3) == 0)
-			assign(cube, &cube->cards->ea, cube->map[i] + 3, &cube->cards->f_ea);
+			assign(cube, &cube->card->ea, cube->map[i] + 3, &cube->card->e);
 		i++;
 	}
-	if (cube->cards->f_no == 0 || cube->cards->f_so == 0
-		|| cube->cards->f_we == 0 || cube->cards->f_ea == 0)
+	if (cube->card->n == 0 || cube->card->s == 0
+		|| cube->card->w == 0 || cube->card->e == 0)
 	{
 		printf("Error\nMissing cardinal texture\n");
 		free_all(cube);
