@@ -256,7 +256,7 @@ void	move_backward(t_game *cube, double moveSpeed)
 	// 	cube->player->posY -= cube->player->dirY * moveSpeed;
 }
 
-void	move_left(t_game *cube, double moveSpeed)
+void	move_right(t_game *cube, double moveSpeed)
 {
 	if (cube->real_map[(int)cube->player->posy]
 		[(int)(cube->player->posx - cube->player->diry * moveSpeed)] == '0')
@@ -275,7 +275,7 @@ void	move_left(t_game *cube, double moveSpeed)
 	// 	cube->player->posY += (cube->player->dirX) * moveSpeed;
 }
 
-void	move_right(t_game *cube, double moveSpeed)
+void	move_left(t_game *cube, double moveSpeed)
 {
 	if (cube->real_map[(int)cube->player->posy]
 		[(int)(cube->player->posx + cube->player->diry * moveSpeed)] == '0')
@@ -301,9 +301,9 @@ void	update_movement(t_game *cube)
 		move_forward(cube, move_speed);
 	if (cube->player->mov_diry == -1)
 		move_backward(cube, move_speed);
-	if (cube->player->mov_dirx == -1)
-		move_left(cube, move_speed);
 	if (cube->player->mov_dirx == 1)
+		move_left(cube, move_speed);
+	if (cube->player->mov_dirx == -1)
 		move_right(cube, move_speed);
 
 	// speed modifiers
@@ -386,9 +386,9 @@ void	update_rotation(t_game *cube)
 	double	rot_speed;
 
 	rot_speed = cube->frameTime * 3.0;
-	if (cube->player->cam_dir == 1)
-		rotate_to_right(cube, rot_speed);
 	if (cube->player->cam_dir == -1)
+		rotate_to_right(cube, rot_speed);
+	if (cube->player->cam_dir == 1)
 		rotate_to_left(cube, rot_speed);
 	// double	rotSpeed;
 
