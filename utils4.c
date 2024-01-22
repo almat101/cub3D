@@ -67,6 +67,5 @@ char *replace_tabs_with_spaces(const char *str, int tab_count)
 		i++;
 	}
 	new_str[j] = '\0';
-	// free(str);
 	return new_str;
 }

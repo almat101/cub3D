@@ -25,7 +25,7 @@ void	check_empty_file(t_list *lst, t_game *cube)
 	if (lst == NULL)
 	{
 		printf("Error\nEmpty map\n");
-		free_all(cube);
+		free_all2(cube);
 		exit (1);
 	}
 }
@@ -70,7 +70,7 @@ void copy_all_map(t_list *lst, t_game *cube)
 }
 
 
-void	parse_map(char **argv, t_game *cube)
+void	parse_info(char **argv, t_game *cube)
 {
 	int		fd;
 	t_list	*lst;

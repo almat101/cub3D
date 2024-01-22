@@ -13,33 +13,6 @@ int	has_xpm_extension(const char *filename)
 	return (0);
 }
 
-int is_space(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f')
-		return (1);
-	return (0);
-}
-char	*trim_whitespace(char *str)
-{
-	char	*end;
-
-	// Trim leading space
-	while(is_space((unsigned char)*str))
-		str++;
-
-	if(*str == 0)  // All spaces?
-		return str;
-
-	// Trim trailing space
-	end = str + ft_strlen(str) - 1;
-	while(end > str && is_space((unsigned char)*end))
-		end--;
-
-	// Write new null terminator character
-	end[1] = '\0';
-
-	return str;
-}
 // assign the texture path to the corresponding variable
 void	assign(t_game *cube, char **dest, char *src, int *flag)
 {

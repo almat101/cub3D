@@ -17,27 +17,17 @@
 
 typedef struct s_player
 {
-	double posx;
-	double posy;
-	double dirx;
-	double diry;
-	double planex;
-	double planey;
-	double mov_dirx;
-	double mov_diry;
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	double mov_dirX;
+	double mov_dirY;
 	double cam_dir;
-	double rot_angle;
+	double rot_angle; //todo mouse
 	char direction;
-	// double			posX;
-	// double			posY;
-	// double			dirX;
-	// double			dirY;
-	// double			planeX;
-	// double			planeY;
-	// double			mov_dirX;
-	// double			mov_dirY;
-	// double			cam_dir;
-	// char			direction;
 } t_player;
 
 typedef struct s_img
@@ -51,58 +41,31 @@ typedef struct s_img
 
 typedef struct s_data
 {
-
+	double camera_x;
+	double delta_dist_x;
+	double delta_dist_y;
 	double map_x;
 	double map_y;
-	double step_x;
-	double step_y;
-	int hit;
-	int side;
-	int line_height;
-	int draw_start;
-	int draw_end;
-	int tex_width;
-	int tex_height;
-	int tex_x;
-	int tex_y;
-	unsigned int color;
-	double camera_x;
+	double perp_wall_dist;
 	double ray_dir_x;
 	double ray_dir_y;
 	double side_dist_x;
 	double side_dist_y;
-	double delta_dist_x;
-	double delta_dist_y;
-	double perp_wall_dist;
-	double wall_x;
+	double step_x;
+	double step_y;
 	double step;
 	double tex_pos;
-	// double			cameraX;
-	// double			rayDirX;
-	// double			rayDirY;
-	// int				mapX;
-	// int				mapY;
-	// double			sideDistX;
-	// double			sideDistY;
-	// double			deltaDistX;
-	// double			deltaDistY;
-	// double			perpWallDist;
-	// int				stepX;
-	// int				stepY;
-	// int				hit;
-	// int				side;
-	// int				lineHeight;
-	// int				drawStart;
-	// int				drawEnd;
-	// unsigned int	color;
-	// int				texWidth;
-	// int				texHeight;
-	// int				texX;
-	// int				texY;
-	// double			wallX;
-	// double			step;
-	// double			texPos;
-
+	double wall_x;
+	int draw_end;
+	int draw_start;
+	int hit;
+	int line_height;
+	int side;
+	int tex_height;
+	int tex_width;
+	int tex_x;
+	int tex_y;
+	unsigned int color;
 } t_data;
 
 typedef struct s_colors
@@ -146,7 +109,7 @@ typedef struct s_game
 {
 	void *mlx;
 	void *mlx_win;
-	t_colors *colors; // floor and ceil
+	t_colors *colors;
 	t_player *player;
 	double time;
 	double oldTime;
@@ -157,23 +120,15 @@ typedef struct s_game
 	char **map;
 	int map_width;
 	int map_height;
-	// char			*north_texture;
-	// char			*south_texture;
-	// char			*west_texture;
-	// char			*east_texture;
-	// char			*ceil_color_rgb;
-	// char			*floor_color_rgb;
-	t_cards *card; // texture no so ea we
-
+	t_cards *card;
 } t_game;
 
 // init.c
 void init_all(t_game *cube);
 int close_window(t_game *cube);
-void destroy_all(t_game *cube);
 
 // parser.c
-void parse_map(char **argv, t_game *cube);
+void parse_info(char **argv, t_game *cube);
 t_list *read_file(int fd);
 void check_empty_file(t_list *lst, t_game *cube);
 int count_lines(t_list *lst);
@@ -208,10 +163,8 @@ void rgb_to_hex(t_game *cube);
 // map.c
 void extract_real_map(t_game *cube);
 void replace_tabs_in_real_map(char ***map, int num_lines);
-int ft_strlen_row(char **info);
 void check_map(t_game *cube);
 char *replace_tabs_with_spaces(const char *str, int tab_count);
-void fill_map_with_zero(char ***map, int num_lines);
 void check_real_map(t_game *cube);
 
 // key.c
@@ -234,7 +187,6 @@ void printf_player(t_game *cube);
 // utils3.c
 int is_player(char c);
 void save_player(t_game *cube);
-void fix_texture_color(t_game *cube);
 
 // utils4.c
 int ft_strlen_row(char **info);
@@ -248,10 +200,10 @@ void extract_texture(t_game *cube);
 void assign(t_game *cube, char **dest, char *src, int *flag);
 
 // load_texture.c
-void load_img(t_game *cube);
-void load_texture_NO_SO(t_game *cube);
-void load_texture_EA_WE(t_game *cube);
-void load_all_texture(t_game *cube);
+void			load_texture_NO_SO(t_game *cube);
+void			load_texture_EA_WE(t_game *cube);
+void			load_all_texture(t_game *cube);
+void			load_imgs(t_game *cube);
 
 void draw_vertical_line(t_data *data, t_game *cube, int x);
 void set_color(t_data *data, t_game *cube, int shift);
@@ -267,7 +219,23 @@ void free_mat(char **mat);
 void free_colors(t_game *cube);
 void free_all2(t_game *cube);
 
-int is_space(char c);
-char *trim_whitespace(char *str);
+// utils5.c
+int			is_space(char c);
+char		*trim_whitespace(char *str);
+
+int	handle_mouse(int x, int y, void	*cube);
+
+// moves.c
+void			move_forward(t_game *cube, double moveSpeed);
+void 			move_backward(t_game *cube, double moveSpeed);
+void 			move_right(t_game *cube, double moveSpeed);
+void 			move_left(t_game *cube, double moveSpeed);
+void 			update_movement(t_game *cube);
+
+//rotate.c
+void			rotate_to_left(t_game *cube, double rot_speed);
+void			rotate_to_right(t_game *cube, double rot_speed);
+void			update_rotation(t_game *cube);
+void			rotate_cam(float angle, t_game *cube);
 
 #endif

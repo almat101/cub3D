@@ -20,7 +20,7 @@ void	load_texture_NO_SO(t_game *cube)
 			&cube->card->south_wall.endian);
 }
 
-void	load_texute_EA_WE(t_game *cube)
+void	load_texture_EA_WE(t_game *cube)
 {
 	cube->card->east_wall.img = mlx_xpm_file_to_image(cube->mlx,
 			cube->card->ea,
@@ -43,5 +43,15 @@ void	load_texute_EA_WE(t_game *cube)
 void	load_all_texture(t_game *cube)
 {
 	load_texture_NO_SO(cube);
-	load_texute_EA_WE(cube);
+	load_texture_EA_WE(cube);
+}
+
+void	load_imgs(t_game *cube)
+{
+	cube->mlx_win = mlx_new_window(cube->mlx,
+		SCREENWIDTH,SCREENHEIGHT, "Cube3D");
+	cube->img->img = mlx_new_image(cube->mlx, SCREENWIDTH, SCREENHEIGHT);
+	cube->img->addr = mlx_get_data_addr(cube->img->img,
+		&cube->img->bpp, &cube->img->line_length,
+		&cube->img->endian);
 }

@@ -338,8 +338,6 @@ void	extract_real_map(t_game *cube)
 			ft_strncmp(cube->info[i], "\n", 1) == 0)
 		{
 			i++;
-			// if (cube->info[i] == NULL)
-			// 	free_err(cube, "Error\nno Map\n");
 			continue ;
 		}
 		add_to_real_map(cube->info[i], cube);

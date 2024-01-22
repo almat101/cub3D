@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	init_all(t_game *cube)
+void init_all(t_game *cube)
 {
 	cube->player = ft_calloc(1, sizeof(t_player));
 	cube->colors = ft_calloc(1, sizeof(t_colors));
@@ -8,14 +8,14 @@ void	init_all(t_game *cube)
 	cube->card = ft_calloc(1, sizeof(t_cards));
 	// cube->map = NULL;
 	// cube->info = NULL;
-	cube->player->posx = 0;
-	cube->player->posy = 0;
-	cube->player->dirx = 0;
-	cube->player->diry = 0;
-	cube->player->planex = 0;
-	cube->player->planey = 0;
-	cube->player->mov_dirx = 0;
-	cube->player->mov_diry = 0;
+	cube->player->posX = 0;
+	cube->player->posY = 0;
+	cube->player->dirX = 0;
+	cube->player->dirY = 0;
+	cube->player->planeX = 0;
+	cube->player->planeY = 0;
+	cube->player->mov_dirX = 0;
+	cube->player->mov_dirY = 0;
 	cube->player->cam_dir = 0;
 	cube->time = 0;
 	cube->oldTime = 0;
@@ -31,13 +31,14 @@ void	init_all(t_game *cube)
 	cube->card->w = 0;
 	cube->colors->f_floor = 0;
 	cube->colors->c_ceil = 0;
+	cube->player->rot_angle = 360;
 	// cube->colors->floor_color = NULL;
 	// cube->colors->ceil_color = NULL;
 	// cube->colors->f_hex_color = NULL;
 	// cube->colors->c_hex_color = NULL;
 }
 
-void	free_all(t_game *cube)
+void free_all(t_game *cube)
 {
 	if (cube->info)
 		free_mat(cube->info);
@@ -54,7 +55,7 @@ void	free_all(t_game *cube)
 	free(cube);
 }
 
-void	free_all2(t_game *cube)
+void free_all2(t_game *cube)
 {
 	if (cube->info)
 		free_mat(cube->info);
@@ -68,7 +69,7 @@ void	free_all2(t_game *cube)
 	free(cube->img);
 	free(cube);
 }
-int	close_window(t_game *cube)
+int close_window(t_game *cube)
 {
 	mlx_destroy_image(cube->mlx, cube->card->east_wall.img);
 	mlx_destroy_image(cube->mlx, cube->card->west_wall.img);
@@ -76,5 +77,5 @@ int	close_window(t_game *cube)
 	mlx_destroy_image(cube->mlx, cube->card->south_wall.img);
 	mlx_destroy_image(cube->mlx, cube->img->img);
 	free_all(cube);
-	exit (0);
+	exit(0);
 }

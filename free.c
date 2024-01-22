@@ -1,7 +1,5 @@
 #include "cube.h"
 
-
-
 void	free_texture(t_game *cube)
 {
 	if ((cube->card->no) != NULL)
