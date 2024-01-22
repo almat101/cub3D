@@ -12,22 +12,32 @@
 # include "mlx_linux/mlx.h"
 # include <stdbool.h>
 
-#define mapWidth 24
-#define mapHeight 24
-#define SCREENWIDTH 640
-#define SCREENHEIGHT 480
+#define SCREENWIDTH 1000
+#define SCREENHEIGHT 700
 
 typedef	struct s_player
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	double			mov_dirX;
-	double			mov_dirY;
-	double			cam_dir;
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	mov_dirx;
+	double	mov_diry;
+	double	cam_dir;
+	double	rot_angle;
+	char	direction;
+	// double			posX;
+	// double			posY;
+	// double			dirX;
+	// double			dirY;
+	// double			planeX;
+	// double			planeY;
+	// double			mov_dirX;
+	// double			mov_dirY;
+	// double			cam_dir;
+	// char			direction;
 }	t_player;
 
 typedef struct s_img
@@ -41,31 +51,57 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	double			cameraX;
-	double			rayDirX;
-	double			rayDirY;
-	int				mapX;
-	int				mapY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			perpWallDist;
-	int				stepX;
-	int				stepY;
-	int				hit;
-	int				side;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
-	unsigned int	color;
-	int				texWidth;
-	int				texHeight;
-	int				texX;
-	int				texY;
-	double			wallX;
-	double			step;
-	double			texPos;
+
+	double				map_x;
+	double				map_y;
+	double				step_x;
+	double				step_y;
+	int					hit;
+	int					side;
+	int					line_height;
+	int					draw_start;
+	int					draw_end;
+	int					tex_width;
+	int					tex_height;
+	int					tex_x;
+	int					tex_y;
+	unsigned int		color;
+	double				camera_x;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	double				side_dist_x;
+	double				side_dist_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
+	double				perp_wall_dist;
+	double				wall_x;
+	double				step;
+	double				tex_pos;
+	// double			cameraX;
+	// double			rayDirX;
+	// double			rayDirY;
+	// int				mapX;
+	// int				mapY;
+	// double			sideDistX;
+	// double			sideDistY;
+	// double			deltaDistX;
+	// double			deltaDistY;
+	// double			perpWallDist;
+	// int				stepX;
+	// int				stepY;
+	// int				hit;
+	// int				side;
+	// int				lineHeight;
+	// int				drawStart;
+	// int				drawEnd;
+	// unsigned int	color;
+	// int				texWidth;
+	// int				texHeight;
+	// int				texX;
+	// int				texY;
+	// double			wallX;
+	// double			step;
+	// double			texPos;
 
 }	t_data;
 
@@ -147,13 +183,13 @@ void		copy_all_map(t_list *lst, t_game *cube);
 // main.c
 void		init_step(t_data *data, t_game *cube);
 void		init_data(t_data *data, t_game *cube, int x);
-void		dda_algorithm(t_data *data);
+void		dda_algorithm(t_data *data,t_game *cube);
 void		render_map(t_game *cube);
 
 
 //check1.c
 void		extract_colors(t_game *cube);
-void		assign_colors(t_game *cube, char **dest, const char *src, int *flag);
+void		assign_colors(t_game *cube, char **dest, char *src, int *flag);
 void		ft_rgb_err(t_game *cube, char *line, char **rgb_value);
 void		check_rgb(t_game *cube);
 void		check_valid_rgb(t_game *cube, char *line);
@@ -223,7 +259,7 @@ void		load_all_texture(t_game *cube);
 void		draw_vertical_line(t_data *data, t_game *cube, int x);
 void		set_color(t_data *data, t_game *cube, int shift);
 void		setTexWH(t_data *data, t_game *cube);
-void		wallPosRayPosOnWall(t_data *data, t_game *cube);
+int			wallPosRayPosOnWall(t_data *data, t_game *cube);
 void		drawTextWall(t_data *data, t_game *cube, int x);
 
 //free.c
@@ -232,6 +268,10 @@ void		free_texture(t_game *cube);
 void		free_list(t_list *lst);
 void		free_mat(char **mat);
 void 		free_colors(t_game *cube);
+void		free_all2(t_game *cube);
+
+int			is_space(char c);
+char	*trim_whitespace(char *str);
 
 #endif
 

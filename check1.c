@@ -16,27 +16,26 @@ void extract_colors(t_game *cube)
 	}
 	if (cube->colors->f_floor == 0 || cube->colors->c_ceil == 0)
 	{
-		printf("Error\nMissing colors\n");
-		free_all(cube);
+		write(2, "Error\nInvalid color\n", 21);
+		free_all2(cube);
 		exit (1);
 	}
 }
 
 // check if the color values are valid and assign them with strdup
-void	assign_colors(t_game *cube, char **dest, const char *src, int *flag)
+void	assign_colors(t_game *cube, char **dest, char *src, int *flag)
 {
-	int src_len;
 
-	src_len = ft_strlen(src) - 1;
+	src = trim_whitespace(src);
 	if (*flag == 1)
 	{
-		printf("Error\nDuplicate color\n");
+		write(2, "Error\nInvalid color\n", 21);
 		free_all(cube);
 		exit(1);
 	}
 	else if (*flag == 0)
 	{
-		*dest = ft_strndup(src, src_len);
+		*dest = ft_strdup(src);
 		*flag = 1;
 	}
 }
@@ -50,8 +49,8 @@ void	ft_rgb_err(t_game *cube, char *line, char **rgb_value)
 	{
 		if (line[i] == ',')
 		{
-			printf("Error\nInvalid RGB values\n");
-			free_all(cube);
+			write(2, "Error\nInvalid color\n", 21);
+			free_all2(cube);
 			free_mat(rgb_value);
 			exit(1);
 		}

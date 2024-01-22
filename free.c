@@ -1,19 +1,6 @@
 #include "cube.h"
 
-void	free_all(t_game *cube)
-{
-	if (cube->map)
-		free_mat(cube->map);
-	if (cube->real_map)
-		free_mat(cube->real_map);
-	free_texture(cube);
-	free_colors(cube);
-	free(cube->player);
-	free(cube->colors);
-	free(cube->img);
-	free(cube->card);
-	free(cube);
-}
+
 
 void	free_texture(t_game *cube)
 {
@@ -23,6 +10,8 @@ void	free_texture(t_game *cube)
 		free(cube->card->so);
 	if ((cube->card->we) != NULL)
 		free(cube->card->we);
+	if ((cube->card->ea) != NULL)
+		free(cube->card->ea);
 }
 
 void free_colors(t_game *cube)

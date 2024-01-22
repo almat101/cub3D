@@ -28,9 +28,9 @@ void	print_texture_value(t_game *cube)
 	printf("%s\n", cube->card->ea);
 }
 
-void	printf_player(t_game *cube)
-{
-	printf("Player position: %f %f\n", cube->player->posX, cube->player->posY);
-//	printf("Player direction: %f %f\n", cube->player->dirX, cube->player->dirY);
-//	printf("Player plane: %f %f\n", cube->player->planeX, cube->player->planeY);
-}
+// void	printf_player(t_game *cube)
+// {
+// 	printf("Player position: %f %f\n", cube->player->posX, cube->player->posY);
+// //	printf("Player direction: %f %f\n", cube->player->dirX, cube->player->dirY);
+// //	printf("Player plane: %f %f\n", cube->player->planeX, cube->player->planeY);
+// }

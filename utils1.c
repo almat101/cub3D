@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr	+ (y * img->line_length + x * (img->bpp / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -49,7 +49,7 @@ void	count_fps(t_game *cube)
 
 void	free_err(t_game *cube, char *s)
 {
-	free_all(cube);
+	free_all2(cube);
 	while (*s)
 		write(2, s++, 1);
 	exit(1);
