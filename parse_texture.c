@@ -73,16 +73,16 @@ void extract_texture(t_game *cube)
 	int i;
 
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "NO ", 3) == 0)
-			assign(cube, &cube->card->no, cube->map[i] + 3, &cube->card->n);
-		else if (ft_strncmp(cube->map[i], "SO ", 3) == 0)
-			assign(cube, &cube->card->so, cube->map[i] + 3, &cube->card->s);
-		else if (ft_strncmp(cube->map[i], "WE ", 3) == 0)
-			assign(cube, &cube->card->we, cube->map[i] + 3, &cube->card->w);
-		else if (ft_strncmp(cube->map[i], "EA ", 3) == 0)
-			assign(cube, &cube->card->ea, cube->map[i] + 3, &cube->card->e);
+		if (ft_strncmp(cube->info[i], "NO ", 3) == 0)
+			assign(cube, &cube->card->no, cube->info[i] + 3, &cube->card->n);
+		else if (ft_strncmp(cube->info[i], "SO ", 3) == 0)
+			assign(cube, &cube->card->so, cube->info[i] + 3, &cube->card->s);
+		else if (ft_strncmp(cube->info[i], "WE ", 3) == 0)
+			assign(cube, &cube->card->we, cube->info[i] + 3, &cube->card->w);
+		else if (ft_strncmp(cube->info[i], "EA ", 3) == 0)
+			assign(cube, &cube->card->ea, cube->info[i] + 3, &cube->card->e);
 		i++;
 	}
 	if (cube->card->n == 0 || cube->card->s == 0

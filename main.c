@@ -1,12 +1,10 @@
 #include "cube.h"
 
-void	init_data(t_data *data, t_game *cube, int x)
+void init_data(t_data *data, t_game *cube, int x)
 {
 	data->camera_x = 2 * x / (double)SCREENWIDTH - 1;
-	data->ray_dir_x = cube->player->dirx + cube->player->planex
-		* data->camera_x;
-	data->ray_dir_y = cube->player->diry + cube->player->planey
-		* data->camera_x;
+	data->ray_dir_x = cube->player->dirx + cube->player->planex * data->camera_x;
+	data->ray_dir_y = cube->player->diry + cube->player->planey * data->camera_x;
 	data->map_x = (int)cube->player->posx;
 	data->map_y = (int)cube->player->posy;
 	if (data->ray_dir_x == 0)
@@ -21,35 +19,31 @@ void	init_data(t_data *data, t_game *cube, int x)
 	init_step(data, cube);
 }
 
-void 	init_step(t_data *data, t_game *cube)
+void init_step(t_data *data, t_game *cube)
 {
 	if (data->ray_dir_x < 0)
 	{
 		data->step_x = -1;
-		data->side_dist_x = (cube->player->posx - (int)data->map_x)
-			* data->delta_dist_x;
+		data->side_dist_x = (cube->player->posx - (int)data->map_x) * data->delta_dist_x;
 	}
 	else
 	{
 		data->step_x = 1;
-		data->side_dist_x = ((int)data->map_x + 1.0 - cube->player->posx)
-			* data->delta_dist_x;
+		data->side_dist_x = ((int)data->map_x + 1.0 - cube->player->posx) * data->delta_dist_x;
 	}
 	if (data->ray_dir_y < 0)
 	{
 		data->step_y = -1;
-		data->side_dist_y = (cube->player->posy - (int)data->map_y)
-			* data->delta_dist_y;
+		data->side_dist_y = (cube->player->posy - (int)data->map_y) * data->delta_dist_y;
 	}
 	else
 	{
 		data->step_y = 1;
-		data->side_dist_y = ((int)data->map_y + 1.0 - cube->player->posy)
-			* data->delta_dist_y;
+		data->side_dist_y = ((int)data->map_y + 1.0 - cube->player->posy) * data->delta_dist_y;
 	}
 }
 
-void	dda_algorithm(t_data *data,t_game *cube)
+void dda_algorithm(t_data *data, t_game *cube)
 {
 	while (data->hit == 0)
 	{
@@ -65,35 +59,31 @@ void	dda_algorithm(t_data *data,t_game *cube)
 			data->map_y += data->step_y;
 			data->side = 1;
 		}
-		if (cube->real_map[(int)data->map_y][(int)data->map_x] == '1')
+		if (cube->map[(int)data->map_y][(int)data->map_x] == '1')
 			data->hit = 1;
 	}
 }
 
-void	set_color(t_data *data, t_game *cube, int shift)
+void set_color(t_data *data, t_game *cube, int shift)
 {
 
 	if (data->side == 1)
 	{
 		if (data->ray_dir_y > 0)
-			data->color = *(unsigned int *)(cube->card->north_wall.addr
-					+ shift);
+			data->color = *(unsigned int *)(cube->card->north_wall.addr + shift);
 		else
-			data->color = *(unsigned int *)(cube->card->south_wall.addr
-					+ shift);
+			data->color = *(unsigned int *)(cube->card->south_wall.addr + shift);
 	}
 	else
 	{
 		if (data->ray_dir_x > 0)
-			data->color = *(unsigned int *)(cube->card->east_wall.addr
-					+ shift);
+			data->color = *(unsigned int *)(cube->card->east_wall.addr + shift);
 		else
-			data->color = *(unsigned int *)(cube->card->west_wall.addr
-					+ shift);
+			data->color = *(unsigned int *)(cube->card->west_wall.addr + shift);
 	}
 }
 
-void	setTexWH(t_data *data, t_game *cube)
+void setTexWH(t_data *data, t_game *cube)
 {
 	if (data->side == 1)
 	{
@@ -101,7 +91,7 @@ void	setTexWH(t_data *data, t_game *cube)
 		{
 			data->tex_width = cube->card->north_wall.width;
 			data->tex_height = cube->card->north_wall.height;
-			return ;
+			return;
 		}
 		data->tex_width = cube->card->south_wall.width;
 		data->tex_height = cube->card->south_wall.height;
@@ -112,21 +102,19 @@ void	setTexWH(t_data *data, t_game *cube)
 		{
 			data->tex_width = cube->card->east_wall.width;
 			data->tex_height = cube->card->east_wall.height;
-			return ;
+			return;
 		}
 		data->tex_width = cube->card->west_wall.width;
 		data->tex_height = cube->card->west_wall.height;
 	}
 }
 
-int	set_wall_x(t_data *data, t_game *cube)
+int set_wall_x(t_data *data, t_game *cube)
 {
 	if (data->side == 0)
-		data->wall_x = cube->player->posy + data->perp_wall_dist
-			* data->ray_dir_y;
+		data->wall_x = cube->player->posy + data->perp_wall_dist * data->ray_dir_y;
 	else
-		data->wall_x = cube->player->posx + data->perp_wall_dist
-			* data->ray_dir_x;
+		data->wall_x = cube->player->posx + data->perp_wall_dist * data->ray_dir_x;
 	data->wall_x -= (int)(data->wall_x);
 	// if (data->hit == 2)
 	// {
@@ -140,7 +128,7 @@ int	set_wall_x(t_data *data, t_game *cube)
 	return (0);
 }
 
-int	wallPosRayPosOnWall(t_data *data, t_game *cube)
+int wallPosRayPosOnWall(t_data *data, t_game *cube)
 {
 	if (data->side == 0)
 		data->perp_wall_dist = (data->side_dist_x - data->delta_dist_x);
@@ -164,32 +152,29 @@ int	wallPosRayPosOnWall(t_data *data, t_game *cube)
 	return (0);
 }
 
-
-void	drawTextWall(t_data *data, t_game *cube, int x)
+void drawTextWall(t_data *data, t_game *cube, int x)
 {
-	int	y;
+	int y;
 
 	data->step = 1.0 * data->tex_height / data->line_height;
-	data->tex_pos = (data->draw_start - SCREENHEIGHT / 2
-			+ data->line_height / 2) * data->step;
+	data->tex_pos = (data->draw_start - SCREENHEIGHT / 2 + data->line_height / 2) * data->step;
 	y = data->draw_start;
 	while (y < data->draw_end)
 	{
 		data->tex_y = (int)data->tex_pos % data->tex_height;
 		data->tex_pos += data->step;
-		set_color(data, cube, 4
-			* (int)(data->tex_height * data->tex_y + data->tex_x));
+		set_color(data, cube, 4 * (int)(data->tex_height * data->tex_y + data->tex_x));
 		my_mlx_pixel_put(cube->img, x, y++, data->color);
 	}
 }
 
-void	draw_vertical_line(t_data *data, t_game *cube, int x)
+void draw_vertical_line(t_data *data, t_game *cube, int x)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (wallPosRayPosOnWall(data, cube))
-		return ;
+		return;
 	while (i < data->draw_start)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->c_ceil);
 	drawTextWall(data, cube, x);
@@ -198,13 +183,13 @@ void	draw_vertical_line(t_data *data, t_game *cube, int x)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->f_floor);
 }
 
-void	render_map(t_game *cube)
+void render_map(t_game *cube)
 {
-	t_data	data;
-	int		x;
+	t_data data;
+	int x;
 
 	x = 0;
-	//load_all_texture(cube);
+	// load_all_texture(cube);
 	while (x < SCREENWIDTH)
 	{
 		init_data(&data, cube, x);
@@ -214,87 +199,81 @@ void	render_map(t_game *cube)
 	}
 }
 
-
-void	move_forward(t_game *cube, double moveSpeed)
+void move_forward(t_game *cube, double moveSpeed)
 {
 
-	if (cube->real_map[(int)cube->player->posy]
-		[(int)(cube->player->posx + cube->player->dirx * moveSpeed)] == '0')
+	if (cube->map[(int)cube->player->posy]
+				 [(int)(cube->player->posx + cube->player->dirx * moveSpeed)] == '0')
 		cube->player->posx += cube->player->dirx * moveSpeed;
-	if (cube->real_map[(int)(cube->player->posy + cube->player->diry
-			* moveSpeed)]
-		[(int)(cube->player->posx)] == '0')
-		cube->player->posy += cube->player->diry
-			* moveSpeed;
+	if (cube->map[(int)(cube->player->posy + cube->player->diry * moveSpeed)]
+				 [(int)(cube->player->posx)] == '0')
+		cube->player->posy += cube->player->diry * moveSpeed;
 	// // move forward if no wall in front of you
-	// if (cube->real_map[(int)cube->player->posY]
+	// if (cube->map[(int)cube->player->posY]
 	// 	[(int)(cube->player->posX + cube->player->dirX * moveSpeed)] == '0')
 	// 	cube->player->posX += cube->player->dirX * moveSpeed;
-	// if (cube->real_map[(int)(cube->player->posY + cube->player->dirY
+	// if (cube->map[(int)(cube->player->posY + cube->player->dirY
 	// 		* moveSpeed)]
 	// 	[(int)(cube->player->posX)] == '0')
 	// 	cube->player->posY += cube->player->dirY
 	// 		* moveSpeed;
 }
 
-void	move_backward(t_game *cube, double moveSpeed)
+void move_backward(t_game *cube, double moveSpeed)
 {
-	if (cube->real_map[(int)cube->player->posy]
-		[(int)(cube->player->posx - cube->player->dirx * moveSpeed)] == '0')
+	if (cube->map[(int)cube->player->posy]
+				 [(int)(cube->player->posx - cube->player->dirx * moveSpeed)] == '0')
 		cube->player->posx -= cube->player->dirx * moveSpeed;
-	if (cube->real_map[(int)(cube->player->posy - cube->player->diry
-			* moveSpeed)]
-		[(int)cube->player->posx] == '0')
+	if (cube->map[(int)(cube->player->posy - cube->player->diry * moveSpeed)]
+				 [(int)cube->player->posx] == '0')
 		cube->player->posy -= cube->player->diry * moveSpeed;
 	// move backwards if no wall behind you
-	// if (cube->real_map[(int)cube->player->posY]
+	// if (cube->map[(int)cube->player->posY]
 	// 	[(int)(cube->player->posX - cube->player->dirX * moveSpeed)] == '0')
 	// 	cube->player->posX -= cube->player->dirX * moveSpeed;
-	// if (cube->real_map[(int)(cube->player->posY - cube->player->dirY
+	// if (cube->map[(int)(cube->player->posY - cube->player->dirY
 	// 		* moveSpeed)]
 	// 	[(int)cube->player->posX] == '0')
 	// 	cube->player->posY -= cube->player->dirY * moveSpeed;
 }
 
-void	move_right(t_game *cube, double moveSpeed)
+void move_right(t_game *cube, double moveSpeed)
 {
-	if (cube->real_map[(int)cube->player->posy]
-		[(int)(cube->player->posx - cube->player->diry * moveSpeed)] == '0')
+	if (cube->map[(int)cube->player->posy]
+				 [(int)(cube->player->posx - cube->player->diry * moveSpeed)] == '0')
 		cube->player->posx -= cube->player->diry * moveSpeed;
-	if (cube->real_map[(int)(cube->player->posy
-			+ cube->player->dirx * moveSpeed)]
-		[(int)(cube->player->posx)] == '0')
+	if (cube->map[(int)(cube->player->posy + cube->player->dirx * moveSpeed)]
+				 [(int)(cube->player->posx)] == '0')
 		cube->player->posy += (cube->player->dirx) * moveSpeed;
 	// move to left
-	// if (cube->real_map[(int)cube->player->posY]
+	// if (cube->map[(int)cube->player->posY]
 	// 	[(int)(cube->player->posX - cube->player->dirY * moveSpeed)] == '0')
 	// 	cube->player->posX -= cube->player->dirY * moveSpeed;
-	// if (cube->real_map[(int)(cube->player->posY
+	// if (cube->map[(int)(cube->player->posY
 	// 		+ cube->player->dirX * moveSpeed)]
 	// 	[(int)(cube->player->posX)] == '0')
 	// 	cube->player->posY += (cube->player->dirX) * moveSpeed;
 }
 
-void	move_left(t_game *cube, double moveSpeed)
+void move_left(t_game *cube, double moveSpeed)
 {
-	if (cube->real_map[(int)cube->player->posy]
-		[(int)(cube->player->posx + cube->player->diry * moveSpeed)] == '0')
+	if (cube->map[(int)cube->player->posy]
+				 [(int)(cube->player->posx + cube->player->diry * moveSpeed)] == '0')
 		cube->player->posx += cube->player->diry * moveSpeed;
-	if (cube->real_map[(int)(cube->player->posy
-			- cube->player->dirx * moveSpeed)][(int)cube->player->posx] == '0')
+	if (cube->map[(int)(cube->player->posy - cube->player->dirx * moveSpeed)][(int)cube->player->posx] == '0')
 		cube->player->posy -= (cube->player->dirx) * moveSpeed;
 	// move to right
-	// if (cube->real_map[(int)cube->player->posY]
+	// if (cube->map[(int)cube->player->posY]
 	// 	[(int)(cube->player->posX + cube->player->dirY * moveSpeed)] == '0')
 	// 	cube->player->posX += cube->player->dirY * moveSpeed;
-	// if (cube->real_map[(int)(cube->player->posY
+	// if (cube->map[(int)(cube->player->posY
 	// 		- cube->player->dirX * moveSpeed)][(int)cube->player->posX] == '0')
 	// 	cube->player->posY -= (cube->player->dirX) * moveSpeed;
 }
 
-void	update_movement(t_game *cube)
+void update_movement(t_game *cube)
 {
-	double	move_speed;
+	double move_speed;
 
 	move_speed = cube->frameTime * 5.0;
 	if (cube->player->mov_diry == 1)
@@ -320,21 +299,17 @@ void	update_movement(t_game *cube)
 	// 	move_rigth(cube, moveSpeed);
 }
 
-void	rotate_to_left(t_game *cube, double rot_speed)
+void rotate_to_left(t_game *cube, double rot_speed)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	double old_dir_x;
+	double old_plane_x;
 
 	old_dir_x = cube->player->dirx;
-	cube->player->dirx = cube->player->dirx * cos(-rot_speed)
-		- cube->player->diry * sin(-rot_speed);
-	cube->player->diry = old_dir_x * sin(-rot_speed)
-		+ cube->player->diry * cos(-rot_speed);
+	cube->player->dirx = cube->player->dirx * cos(-rot_speed) - cube->player->diry * sin(-rot_speed);
+	cube->player->diry = old_dir_x * sin(-rot_speed) + cube->player->diry * cos(-rot_speed);
 	old_plane_x = cube->player->planex;
-	cube->player->planex = cube->player->planex * cos(-rot_speed)
-		- cube->player->planey * sin(-rot_speed);
-	cube->player->planey = old_plane_x * sin(-rot_speed)
-		+ cube->player->planey * cos(-rot_speed);
+	cube->player->planex = cube->player->planex * cos(-rot_speed) - cube->player->planey * sin(-rot_speed);
+	cube->player->planey = old_plane_x * sin(-rot_speed) + cube->player->planey * cos(-rot_speed);
 	// double	olddirX;
 	// double	oldplaneX;
 	// // rotate to the right
@@ -350,21 +325,17 @@ void	rotate_to_left(t_game *cube, double rot_speed)
 	// }
 }
 
-void	rotate_to_right(t_game *cube, double rot_speed)
+void rotate_to_right(t_game *cube, double rot_speed)
 {
-	double	old_dir_x;
-	double	old_plane_x;
+	double old_dir_x;
+	double old_plane_x;
 
 	old_dir_x = cube->player->dirx;
-	cube->player->dirx = cube->player->dirx * cos(rot_speed)
-		- cube->player->diry * sin(rot_speed);
-	cube->player->diry = old_dir_x * sin(rot_speed)
-		+ cube->player->diry * cos(rot_speed);
+	cube->player->dirx = cube->player->dirx * cos(rot_speed) - cube->player->diry * sin(rot_speed);
+	cube->player->diry = old_dir_x * sin(rot_speed) + cube->player->diry * cos(rot_speed);
 	old_plane_x = cube->player->planex;
-	cube->player->planex = cube->player->planex * cos(rot_speed)
-		- cube->player->planey * sin(rot_speed);
-	cube->player->planey = old_plane_x * sin(rot_speed)
-		+ cube->player->planey * cos(rot_speed);
+	cube->player->planex = cube->player->planex * cos(rot_speed) - cube->player->planey * sin(rot_speed);
+	cube->player->planey = old_plane_x * sin(rot_speed) + cube->player->planey * cos(rot_speed);
 	// double	olddirX;
 	// double	oldplaneX;
 
@@ -381,9 +352,9 @@ void	rotate_to_right(t_game *cube, double rot_speed)
 	// }
 }
 
-void	update_rotation(t_game *cube)
+void update_rotation(t_game *cube)
 {
-	double	rot_speed;
+	double rot_speed;
 
 	rot_speed = cube->frameTime * 3.0;
 	if (cube->player->cam_dir == -1)
@@ -397,14 +368,14 @@ void	update_rotation(t_game *cube)
 	// rotate_to_left(cube, rotSpeed);
 }
 
-void	mlx_hooks(t_game *cube)
+void mlx_hooks(t_game *cube)
 {
 	mlx_hook(cube->mlx_win, 17, 0, close_window, cube);
 	mlx_hook(cube->mlx_win, 2, 1L << 0, key_press, (void *)cube);
 	mlx_hook(cube->mlx_win, 3, 1L << 1, key_release, (void *)cube);
 }
 
-int	game_loop(t_game *cube)
+int game_loop(t_game *cube)
 {
 	render_map(cube);
 	mlx_put_image_to_window(cube->mlx, cube->mlx_win, cube->img->img, 0, 0);
@@ -414,8 +385,7 @@ int	game_loop(t_game *cube)
 	return (0);
 }
 
-
-void	init_direction(t_game *cube)
+void init_direction(t_game *cube)
 {
 	if (cube->player->direction == 'W')
 	{
@@ -459,22 +429,22 @@ void	init_direction(t_game *cube)
 	// }
 }
 
-void	save_player(t_game *cube)
+void save_player(t_game *cube)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
-	while(cube->real_map[i] != NULL)
+	while (cube->map[i] != NULL)
 	{
 		j = 0;
-		while (cube->real_map[i][j] != '\0')
+		while (cube->map[i][j] != '\0')
 		{
-			if (is_player(cube->real_map[i][j]))
+			if (is_player(cube->map[i][j]))
 			{
 				cube->player->posx = i;
 				cube->player->posy = j;
-				break ;
+				break;
 			}
 			j++;
 		}
@@ -482,25 +452,23 @@ void	save_player(t_game *cube)
 	}
 }
 
- int	player_existence(t_game *game)
+int player_existence(t_game *game)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = -1;
-	while (game->real_map[++i])
+	while (game->map[++i])
 	{
 		j = -1;
-		while (game->real_map[i][++j])
+		while (game->map[i][++j])
 		{
-			if (game->real_map[i][j] == 'N' || game->real_map[i][j] == 'S'
-				|| game->real_map[i][j] == 'E'
-				|| game->real_map[i][j] == 'W')
+			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
 				game->player->posy = i + 0.5;
 				game->player->posx = j + 0.5;
-				game->player->direction = game->real_map[i][j];
-				game->real_map[i][j] = '0';
+				game->player->direction = game->map[i][j];
+				game->map[i][j] = '0';
 				return (1);
 			}
 		}
@@ -508,18 +476,18 @@ void	save_player(t_game *cube)
 	return (0);
 }
 
-void	load_imgs(t_game *cube)
+void load_imgs(t_game *cube)
 {
 	cube->mlx_win = mlx_new_window(cube->mlx, SCREENWIDTH,
-			SCREENHEIGHT, "Cube3D");
+								   SCREENHEIGHT, "Cube3D");
 	cube->img->img = mlx_new_image(cube->mlx, SCREENWIDTH, SCREENHEIGHT);
 	cube->img->addr = mlx_get_data_addr(cube->img->img,
-			&cube->img->bpp, &cube->img->line_length,
-			&cube->img->endian);
+										&cube->img->bpp, &cube->img->line_length,
+										&cube->img->endian);
 }
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game		*cube;
+	t_game *cube;
 
 	(void)argv;
 	if (argc == 2)
@@ -539,14 +507,14 @@ int	main(int argc, char **argv)
 		check_symbols(cube); // dopo realmap
 		check_flmap(cube);
 		check_map(cube);
-		replace_tabs_in_real_map(&cube->real_map, cube->map_height);
+		replace_tabs_in_real_map(&cube->map, cube->map_height);
 		save_player(cube);
-		// print_map(cube->real_map);
+		// print_map(cube->map);
 		if (!player_existence(cube))
 			free_err(cube, "Error\nPlayer doesn't exist\n");
-		//printf_player(cube);
-		//print_colors_value(cube);
-		//print_texture_value(cube);
+		// printf_player(cube);
+		// print_colors_value(cube);
+		// print_texture_value(cube);
 		cube->mlx = mlx_init();
 		load_imgs(cube);
 		load_all_texture(cube);

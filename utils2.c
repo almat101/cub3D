@@ -1,13 +1,13 @@
 #include "cube.h"
 
-void	print_map(char **map)
+void	print_map(char **info)
 {
 	int		i;
 
 	i = 0;
-	while (map[i] != NULL)
+	while (info[i] != NULL)
 	{
-		printf("%s", map[i]);
+		printf("%s", info[i]);
 		i++;
 	}
 }

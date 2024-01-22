@@ -57,16 +57,16 @@ void rgb_to_hex(t_game *cube)
 	int i;
 
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "F ", 2) == 0)
+		if (ft_strncmp(cube->info[i], "F ", 2) == 0)
 		{
-			convert_color(cube, cube->map[i], 1);
+			convert_color(cube, cube->info[i], 1);
 			cube->colors->f_hex_color = to_hex(cube->colors->f_floor);
 		}
-		else if (ft_strncmp(cube->map[i], "C ", 2) == 0)
+		else if (ft_strncmp(cube->info[i], "C ", 2) == 0)
 		{
-			convert_color(cube, cube->map[i], 0);
+			convert_color(cube, cube->info[i], 0);
 			cube->colors->c_hex_color = to_hex(cube->colors->c_ceil);
 		}
 		i++;

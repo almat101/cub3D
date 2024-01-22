@@ -65,19 +65,19 @@
 // // 		i = 0;
 // // 		new = lst;
 // // 		line_count = count_lines(lst);
-// // 		cube->real_map = malloc(sizeof(char*) * (line_count + 1));
-// // 		if (cube->real_map == NULL)
+// // 		cube->map = malloc(sizeof(char*) * (line_count + 1));
+// // 		if (cube->map == NULL)
 // // 		{
 // // 			printf("Error\nFailed to allocate memory for map\n");
 // // 			exit (1);
 // // 		}
 // // 		while (new != NULL)
 // // 		{
-// // 			cube->real_map[i] = new->content;
+// // 			cube->map[i] = new->content;
 // // 			i++;
 // // 			new = new->next;
 // // 		}
-// // 		cube->real_map[i] = NULL; // end the map with a NULL pointer
+// // 		cube->map[i] = NULL; // end the map with a NULL pointer
 // // }
 
 // // void	extract_map(char **argv, t_game *cube)
@@ -108,19 +108,19 @@
 // 	i = 0;
 // 	new = lst;
 // 	line_count = count_lines(lst);
-// 	cube->real_map = malloc(sizeof(char*) * (line_count + 1));
-// 	if (cube->real_map == NULL)
+// 	cube->map = malloc(sizeof(char*) * (line_count + 1));
+// 	if (cube->map == NULL)
 // 	{
 // 		printf("Error\nFailed to allocate memory for map\n");
 // 		exit (1);
 // 	}
 // 	while (new != NULL)
 // 	{
-// 		cube->real_map[i] = new->content;
+// 		cube->map[i] = new->content;
 // 		i++;
 // 		new = new->next;
 // 	}
-// 	cube->real_map[i] = NULL;
+// 	cube->map[i] = NULL;
 // }
 
 // int	is_texture_or_color(char *line)
@@ -301,24 +301,24 @@ void add_to_real_map(char *line, t_game *cube)
 	if (!line)
 		free_err(cube,"Error\nEmpty line in map\n");
 	old_size = 0;
-	while (cube->real_map && cube->real_map[old_size] != NULL)
+	while (cube->map && cube->map[old_size] != NULL)
 		old_size++;
 	new_size = old_size + 1;
-	new_real_map = ft_realloc(cube->real_map, (old_size + 1) * sizeof(char *),
+	new_real_map = ft_realloc(cube->map, (old_size + 1) * sizeof(char *),
 	 (new_size + 1) * sizeof(char *));
 	if (new_real_map == NULL)
 	{
 		printf("Error\nFailed to allocate memory for real map\n");
 		exit(1);
 	}
-	cube->real_map = new_real_map;
-	cube->real_map[old_size] = ft_strdup(line);
-	if (cube->real_map[old_size] == NULL)
+	cube->map = new_real_map;
+	cube->map[old_size] = ft_strdup(line);
+	if (cube->map[old_size] == NULL)
 	{
 		printf("Error\nFailed to allocate memory for real map line\n");
 		exit(1);
 	}
-	cube->real_map[new_size] = NULL;
+	cube->map[new_size] = NULL;
 }
 
 
@@ -327,25 +327,25 @@ void	extract_real_map(t_game *cube)
 	int		i;
 
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "NO ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "SO ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "WE ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "EA ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "F ", 2) == 0 ||
-			ft_strncmp(cube->map[i], "C ", 2) == 0 ||
-			ft_strncmp(cube->map[i], "\n", 1) == 0)
+		if (ft_strncmp(cube->info[i], "NO ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "SO ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "WE ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "EA ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "F ", 2) == 0 ||
+			ft_strncmp(cube->info[i], "C ", 2) == 0 ||
+			ft_strncmp(cube->info[i], "\n", 1) == 0)
 		{
 			i++;
-			// if (cube->map[i] == NULL)
+			// if (cube->info[i] == NULL)
 			// 	free_err(cube, "Error\nno Map\n");
 			continue ;
 		}
-		add_to_real_map(cube->map[i], cube);
+		add_to_real_map(cube->info[i], cube);
 		i++;
 	}
-	cube->map_height = ft_strlen_row(cube->real_map);
+	cube->map_height = ft_strlen_row(cube->map);
 }
 
 
@@ -356,18 +356,18 @@ void	check_real_map(t_game *cube)
 
 	is_map = 0;
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "NO ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "SO ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "WE ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "EA ", 3) == 0 ||
-			ft_strncmp(cube->map[i], "F ", 2) == 0 ||
-			ft_strncmp(cube->map[i], "C ", 2) == 0 ||
-			ft_strncmp(cube->map[i], "\n", 1) == 0)
+		if (ft_strncmp(cube->info[i], "NO ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "SO ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "WE ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "EA ", 3) == 0 ||
+			ft_strncmp(cube->info[i], "F ", 2) == 0 ||
+			ft_strncmp(cube->info[i], "C ", 2) == 0 ||
+			ft_strncmp(cube->info[i], "\n", 1) == 0)
 		{
 			i++;
-			if (cube->map[i] == NULL && !is_map)
+			if (cube->info[i] == NULL && !is_map)
 				free_err(cube, "Error\nNo Map after texture and colors\n");
 			continue ;
 		}

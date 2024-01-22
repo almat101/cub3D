@@ -17,13 +17,13 @@ int	main (int argc, char **argv)
 		extract_real_map(cube);
 		check_rgb(cube);
 		rgb_to_hex(cube);
-		replace_tabs_in_real_map(&cube->real_map, cube->map_height);
+		replace_tabs_in_real_map(&cube->map, cube->map_height);
 		check_symbols(cube);
 		save_player(cube);
 
 		//cube->mlx = mlx_init();
 
-		print_map(cube->real_map);
+		print_map(cube->map);
 		printf_player(cube);
 		check_player(cube);
 		check_flmap(cube);

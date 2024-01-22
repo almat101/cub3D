@@ -6,24 +6,24 @@ void extract_colors(t_game *cube)
 	int i;
 
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "F ", 2) == 0)
-			assign_colors(cube, &cube->colors->floor_color, cube->map[i] + 2, &cube->colors->f_floor);
-		else if (ft_strncmp(cube->map[i], "C ", 2) == 0)
-			assign_colors(cube, &cube->colors->ceil_color, cube->map[i] + 2, &cube->colors->c_ceil);
+		if (ft_strncmp(cube->info[i], "F ", 2) == 0)
+			assign_colors(cube, &cube->colors->floor_color, cube->info[i] + 2, &cube->colors->f_floor);
+		else if (ft_strncmp(cube->info[i], "C ", 2) == 0)
+			assign_colors(cube, &cube->colors->ceil_color, cube->info[i] + 2, &cube->colors->c_ceil);
 		i++;
 	}
 	if (cube->colors->f_floor == 0 || cube->colors->c_ceil == 0)
 	{
 		write(2, "Error\nInvalid color\n", 21);
 		free_all2(cube);
-		exit (1);
+		exit(1);
 	}
 }
 
 // check if the color values are valid and assign them with strdup
-void	assign_colors(t_game *cube, char **dest, char *src, int *flag)
+void assign_colors(t_game *cube, char **dest, char *src, int *flag)
 {
 
 	src = trim_whitespace(src);
@@ -40,7 +40,7 @@ void	assign_colors(t_game *cube, char **dest, char *src, int *flag)
 	}
 }
 
-void	ft_rgb_err(t_game *cube, char *line, char **rgb_value)
+void ft_rgb_err(t_game *cube, char *line, char **rgb_value)
 {
 	int i;
 
@@ -61,9 +61,9 @@ void	ft_rgb_err(t_game *cube, char *line, char **rgb_value)
 // check if the color values are valid rgb > 0 and < 255
 void check_valid_rgb(t_game *cube, char *line)
 {
-	char	**rgb_values;
-	int		i;
-	int 	value;
+	char **rgb_values;
+	int i;
+	int value;
 
 	value = 0;
 	i = 0;
@@ -87,12 +87,12 @@ void check_rgb(t_game *cube)
 	int i;
 
 	i = 0;
-	while (cube->map[i] != NULL)
+	while (cube->info[i] != NULL)
 	{
-		if (ft_strncmp(cube->map[i], "F ", 2) == 0)
-			check_valid_rgb(cube, cube->map[i]);
-		else if (ft_strncmp(cube->map[i], "C ", 2) == 0)
-			check_valid_rgb(cube, cube->map[i]);
+		if (ft_strncmp(cube->info[i], "F ", 2) == 0)
+			check_valid_rgb(cube, cube->info[i]);
+		else if (ft_strncmp(cube->info[i], "C ", 2) == 0)
+			check_valid_rgb(cube, cube->info[i]);
 		i++;
 	}
 }

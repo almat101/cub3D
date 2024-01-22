@@ -1,32 +1,32 @@
 #include "cube.h"
 
-int ft_strlen_row(char **map)
+int ft_strlen_row(char **info)
 {
 	int i;
 
 	i = 0;
-	while (map[i] != NULL)
+	while (info[i] != NULL)
 	{
 		i++;
 	}
 	return i;
 }
 
-void replace_tabs_in_real_map(char ***real_map, int num_lines)
+void replace_tabs_in_real_map(char ***map, int num_lines)
 {
-	int		i;
-	char	*new_line;
+	int i;
+	char *new_line;
 
 	i = 0;
 	while (i < num_lines)
 	{
-		new_line = replace_tabs_with_spaces((*real_map)[i],num_lines);
-		free((*real_map)[i]);
-		(*real_map)[i] = new_line;
+		new_line = replace_tabs_with_spaces((*map)[i], num_lines);
+		free((*map)[i]);
+		(*map)[i] = new_line;
 		i++;
 	}
 }
-int	count_tab(char *line)
+int count_tab(char *line)
 {
 	int i;
 	int count;
@@ -42,11 +42,11 @@ int	count_tab(char *line)
 	}
 	return (count);
 }
-char	*replace_tabs_with_spaces(const char *str, int tab_count)
+char *replace_tabs_with_spaces(const char *str, int tab_count)
 {
-	char	*new_str;
-	int		i;
-	int		j;
+	char *new_str;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -67,6 +67,6 @@ char	*replace_tabs_with_spaces(const char *str, int tab_count)
 		i++;
 	}
 	new_str[j] = '\0';
-	//free(str);
+	// free(str);
 	return new_str;
 }

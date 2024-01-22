@@ -1,8 +1,8 @@
 #include "cube.h"
 
-//check if the file is a .cub file
+// check if the file is a .cub file
 
-void	is_cube(char *argv)
+void is_cube(char *argv)
 {
 	int len;
 
@@ -10,30 +10,30 @@ void	is_cube(char *argv)
 	if (len < 5)
 	{
 		write(2, "Error\nInvalid file extension\n", 30);
-		exit (1);
+		exit(1);
 	}
 	if (ft_strncmp(argv + len - 4, ".cub", 4) != 0)
 	{
 		write(2, "Error\nInvalid file extension\n", 30);
-		exit (1);
+		exit(1);
 	}
 }
 
-//check if the numbers of player is valid
-void	check_player(t_game *cube)
+// check if the numbers of player is valid
+void check_player(t_game *cube)
 {
-	int	i;
-	int	j;
-	int	count;
+	int i;
+	int j;
+	int count;
 
 	j = 0;
 	count = 0;
-	while (cube->real_map[j])
+	while (cube->map[j])
 	{
 		i = 0;
-		while (cube->real_map[j][i])
+		while (cube->map[j][i])
 		{
-			if (ft_strchr("NWSE", cube->real_map[j][i]))
+			if (ft_strchr("NWSE", cube->map[j][i]))
 				count++;
 			i++;
 		}
@@ -43,30 +43,28 @@ void	check_player(t_game *cube)
 		free_err(cube, "Error\nInvalid number of players\n");
 }
 
-//check if the map is surrounded by walls
-void	check_map(t_game *cube)
+// check if the map is surrounded by walls
+void check_map(t_game *cube)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
-	while (cube->real_map[y])
+	while (cube->map[y])
 	{
 		x = 0;
-		while (cube->real_map[y][x])
+		while (cube->map[y][x])
 		{
-			if (ft_strchr("0NWSE", cube->real_map[y][x]))
+			if (ft_strchr("0NWSE", cube->map[y][x]))
 			{
-				if ((cube->real_map[y][x] == '0') && (cube->real_map[y-1][x] == 0 || cube->real_map[y + 1][x] == 0))
-					free_err(cube, "dio");
-				if (((cube->real_map[y - 1][x] == 32
-					|| cube->real_map[y + 1][x] == 32
-					|| cube->real_map[y][x - 1] == 32
-					|| cube->real_map[y][x + 1] == 32 ))
-					|| ((cube->real_map[y][x + 1] == '\n'
-					|| cube->real_map[y][x - 1] == '\n'
-					|| cube->real_map[y + 1][x] == '\n'
-					|| cube->real_map[y - 1][x] == '\n')))
+				if ((cube->map[y][x] == '0') && (cube->map[y-1][x] == 0
+					|| cube->map[y+1][x] == 0))
+					free_err(cube, "Error\nnot surrounded by wall\n");
+				if (((cube->map[y-1][x] == 32 || cube->map[y+1][x] == 32
+					|| cube->map[y][x-1] == 32 || cube->map[y][x+1] == 32))
+					|| ((cube->map[y][x+1] == '\n' || cube->map[y][x-1] == '\n'
+					|| cube->map[y+1][x] == '\n' 
+					|| cube->map[y-1][x] == '\n')))
 					free_err(cube, "Error\nnot surrounded by wall\n");
 			}
 			x++;
@@ -81,23 +79,23 @@ void	check_map(t_game *cube)
 // 	int	y;
 
 // 	y = 0;
-// 	while (cube->real_map[y])
+// 	while (cube->map[y])
 // 	{
 // 		x = 0;
-// 		while (cube->real_map[y][x])
+// 		while (cube->map[y][x])
 // 		{
-// 			if (ft_strchr("0NWSE", cube->real_map[y][x]))
+// 			if (ft_strchr("0NWSE", cube->map[y][x]))
 // 			{
-// 				if ((cube->real_map[y - 1][x] == 32
-// 				|| cube->real_map[y + 1][x] == 32
-// 				|| cube->real_map[y][x - 1] == 32
-// 				|| cube->real_map[y][x + 1] == 32 )
-// 				|| (cube->real_map[y][x + 1] == '\n'
-// 				|| cube->real_map[y][x - 1] == '\n'
-// 				|| cube->real_map[y + 1][x] == '\n'
-// 				|| cube->real_map[y - 1][x] == '\n')
-// 				|| (cube->real_map[y][x] == '0' && cube->real_map[y + 1][x] == '1'
-// 				&& (cube->real_map[y + 1][x + 1] == '\n' || cube->real_map[y + 1][x - 1] == 32)))
+// 				if ((cube->map[y - 1][x] == 32
+// 				|| cube->map[y + 1][x] == 32
+// 				|| cube->map[y][x - 1] == 32
+// 				|| cube->map[y][x + 1] == 32 )
+// 				|| (cube->map[y][x + 1] == '\n'
+// 				|| cube->map[y][x - 1] == '\n'
+// 				|| cube->map[y + 1][x] == '\n'
+// 				|| cube->map[y - 1][x] == '\n')
+// 				|| (cube->map[y][x] == '0' && cube->map[y + 1][x] == '1'
+// 				&& (cube->map[y + 1][x + 1] == '\n' || cube->map[y + 1][x - 1] == 32)))
 // 					free_err(cube, "Error\n");
 // 			}
 // 			x++;
@@ -106,44 +104,44 @@ void	check_map(t_game *cube)
 // 	}
 // }
 
-//check first and last line of the real_map
-void	check_flmap(t_game *cube)
+// check first and last line of the map
+void check_flmap(t_game *cube)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
 	x = 0;
-	while (cube->real_map[y][x])
+	while (cube->map[y][x])
 	{
-		if (cube->real_map[y][x] == '0')
+		if (cube->map[y][x] == '0')
 			free_err(cube, "Error\nnot surrounded by wall\n");
 		x++;
 	}
 	y = cube->map_height - 1;
 	x = 0;
-	while (cube->real_map[y][x])
+	while (cube->map[y][x])
 	{
-		if (cube->real_map[y][x] == '0')
+		if (cube->map[y][x] == '0')
 			free_err(cube, "Error\nnot surrounded by wall\n");
 		x++;
 	}
 }
 
-//check if there is any invalid symbols in the map
-void	check_symbols(t_game *cube)
+// check if there is any invalid symbols in the map
+void check_symbols(t_game *cube)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
-	while (cube->real_map[i])
+	while (cube->map[i])
 	{
 		j = 0;
-		while (cube->real_map[i][j])
+		while (cube->map[i][j])
 		{
-			if (!ft_strchr("10NSEW \n", cube->real_map[i][j]))
-				free_err(cube,"Error\nWrong symbols in the map\n");
+			if (!ft_strchr("10NSEW \n", cube->map[i][j]))
+				free_err(cube, "Error\nWrong symbols in the map\n");
 			j++;
 		}
 		i++;
@@ -156,21 +154,21 @@ void	check_symbols(t_game *cube)
 //     int	y;
 
 //     y = 0;
-//     while (cube->real_map[y])
+//     while (cube->map[y])
 //     {
 //         x = 0;
-//         while (cube->real_map[y][x])
+//         while (cube->map[y][x])
 //         {
-//             if (ft_strchr("0NWSE", cube->real_map[y][x]))
+//             if (ft_strchr("0NWSE", cube->map[y][x]))
 //             {
-// 				printf("cube->real_map[%d][%d] = %c\n",y,x, cube->real_map[y][x]);
-//                 if ((y > 0 && cube->real_map[y - 1][x] == 32) ||
-//                     (cube->real_map[y + 1] && cube->real_map[y + 1][x] == 32) ||
-//                     (x > 0 && cube->real_map[y][x - 1] == 32) ||
-//                     (cube->real_map[y][x + 1] && cube->real_map[y][x + 1] == 32))
+// 				printf("cube->map[%d][%d] = %c\n",y,x, cube->map[y][x]);
+//                 if ((y > 0 && cube->map[y - 1][x] == 32) ||
+//                     (cube->map[y + 1] && cube->map[y + 1][x] == 32) ||
+//                     (x > 0 && cube->map[y][x - 1] == 32) ||
+//                     (cube->map[y][x + 1] && cube->map[y][x + 1] == 32))
 // 					printf("if y = %d, x = %d\n", y, x);
 // 					//free_err(cube, "Error\nnot surrounded by wall\n");
-//                 else if ((y == 0 || x == 0 || !cube->real_map[y + 1] || !cube->real_map[y][x + 1]))
+//                 else if ((y == 0 || x == 0 || !cube->map[y + 1] || !cube->map[y][x + 1]))
 //                     printf("else if y = %d, x = %d\n", y, x);
 // 					//free_err(cube, "Error\nnot surrounded by wall\n");
 //             }

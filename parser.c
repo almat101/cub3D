@@ -54,19 +54,19 @@ void copy_all_map(t_list *lst, t_game *cube)
 	i = 0;
 	new = lst;
 	line_count = count_lines(lst);
-	cube->map = malloc(sizeof(char*) * (line_count + 1));
-	if (cube->map == NULL)
+	cube->info = malloc(sizeof(char*) * (line_count + 1));
+	if (cube->info == NULL)
 	{
 		printf("Error\nFailed to allocate memory for map\n");
 		exit (1);
 	}
 	while (new != NULL)
 	{
-		cube->map[i] = new->content;
+		cube->info[i] = new->content;
 		i++;
 		new = new->next;
 	}
-	cube->map[i] = NULL;
+	cube->info[i] = NULL;
 }
 
 
