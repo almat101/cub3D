@@ -139,10 +139,6 @@ void check_empty_file(t_list *lst, t_game *cube);
 int count_lines(t_list *lst);
 void copy_all_map(t_list *lst, t_game *cube);
 
-// main.c
-void dda_algorithm(t_data *data, t_game *cube);
-void render_map(t_game *cube);
-
 // check1.c
 void extract_colors(t_game *cube);
 void assign_colors(t_game *cube, char **dest, char *src, int *flag);
@@ -151,7 +147,7 @@ void check_rgb(t_game *cube);
 void check_valid_rgb(t_game *cube, char *line);
 
 // check2.c
-void is_cube(char *argv);
+void is_cube(t_game *cube, char *argv);
 void check_player(t_game *cube);
 void check_map(t_game *cube);
 void check_flmap(t_game *cube);
@@ -227,6 +223,7 @@ void			free_all2(t_game *cube);
 // utils5.c
 int				is_space(char c);
 char			*trim_whitespace(char *str);
+void			mlx_hooks(t_game *cube);
 
 // moves.c
 void			move_forward(t_game *cube, double moveSpeed);
@@ -240,5 +237,23 @@ void			rotate_to_left(t_game *cube, double rot_speed);
 void			rotate_to_right(t_game *cube, double rot_speed);
 void			update_rotation(t_game *cube);
 void			rotate_cam(float angle, t_game *cube);
+
+
+//render.c
+void			render_map(t_game *cube);
+void			dda_algorithm(t_data *data, t_game *cube);
+void			draw_vertical_line(t_data *data, t_game *cube, int x);
+
+//draw.c
+void			drawTextWall(t_data *data, t_game *cube, int x);
+void			set_color(t_data *data, t_game *cube, int shift);
+void			setTexWH(t_data *data, t_game *cube);
+int 			set_wall_x(t_data *data, t_game *cube);
+int				wallPosRayPosOnWall(t_data *data, t_game *cube);
+
+//main.c
+int				game_loop(t_game *cube);
+void			initialize_game(t_game *cube, char **argv);
+void			start_game(t_game *cube);
 
 #endif

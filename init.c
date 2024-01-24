@@ -92,12 +92,12 @@ void	init_direction(t_game *cube)
 {
 	if (cube->player->direction == 'W')
 	{
-		cube->player->dirX = -1;
+		cube->player->dirX = 1;
 		cube->player->planeY = 0.66;
 	}
 	if (cube->player->direction == 'E')
 	{
-		cube->player->dirX = 1;
+		cube->player->dirX = -1;
 		cube->player->planeY = -0.66;
 	}
 	if (cube->player->direction == 'N')

@@ -26,6 +26,7 @@ void replace_tabs_in_real_map(char ***map, int num_lines)
 		i++;
 	}
 }
+
 int count_tab(char *line)
 {
 	int i;
@@ -42,6 +43,7 @@ int count_tab(char *line)
 	}
 	return (count);
 }
+
 char *replace_tabs_with_spaces(const char *str, int tab_count)
 {
 	char *new_str;

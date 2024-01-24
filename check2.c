@@ -1,7 +1,7 @@
 #include "cube.h"
 
 // check if the file is a .cub file
-void is_cube(char *argv)
+void is_cube(t_game *cube, char *argv)
 {
 	int len;
 
@@ -9,11 +9,14 @@ void is_cube(char *argv)
 	if (len < 5)
 	{
 		write(2, "Error\nInvalid file extension\n", 30);
+		free(cube);
 		exit(1);
 	}
 	if (ft_strncmp(argv + len - 4, ".cub", 4) != 0)
 	{
 		write(2, "Error\nInvalid file extension\n", 30);
+		write(2, "Please use .cub file\n", 21);
+		free(cube);
 		exit(1);
 	}
 }
@@ -61,7 +64,7 @@ void check_map(t_game *cube)
 					free_err(cube, "Error\nnot surrounded by wall\n");
 				if (((cube->map[y - 1][x] == 32 || cube->map[y + 1][x] == 32
 					|| cube->map[y][x - 1] == 32 || cube->map[y][x + 1] == 32))
-					|| ((cube->map[y][x + 1] == '\n' || 
+					|| ((cube->map[y][x + 1] == '\n' ||
 					cube->map[y][x - 1] == '\n' || cube->map[y + 1][x] == '\n'
 					|| cube->map[y - 1][x] == '\n')))
 					free_err(cube, "Error\nnot surrounded by wall\n");
