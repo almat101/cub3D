@@ -1,48 +1,5 @@
 #include "cube.h"
 
-void init_data(t_data *data, t_game *cube, int x)
-{
-	data->camera_x = 2 * x / (double)SCREENWIDTH - 1;
-	data->ray_dir_x = cube->player->dirX + cube->player->planeX * data->camera_x;
-	data->ray_dir_y = cube->player->dirY + cube->player->planeY * data->camera_x;
-	data->map_x = (int)cube->player->posX;
-	data->map_y = (int)cube->player->posY;
-	if (data->ray_dir_x == 0)
-		data->delta_dist_x = 1e30;
-	else
-		data->delta_dist_x = fabs(1.0f / data->ray_dir_x);
-	if (data->ray_dir_y == 0)
-		data->delta_dist_y = 1e30;
-	else
-		data->delta_dist_y = fabs(1.0f / data->ray_dir_y);
-	data->hit = 0;
-	init_step(data, cube);
-}
-
-void init_step(t_data *data, t_game *cube)
-{
-	if (data->ray_dir_x < 0)
-	{
-		data->step_x = -1;
-		data->side_dist_x = (cube->player->posX - (int)data->map_x) * data->delta_dist_x;
-	}
-	else
-	{
-		data->step_x = 1;
-		data->side_dist_x = ((int)data->map_x + 1.0 - cube->player->posX) * data->delta_dist_x;
-	}
-	if (data->ray_dir_y < 0)
-	{
-		data->step_y = -1;
-		data->side_dist_y = (cube->player->posY - (int)data->map_y) * data->delta_dist_y;
-	}
-	else
-	{
-		data->step_y = 1;
-		data->side_dist_y = ((int)data->map_y + 1.0 - cube->player->posY) * data->delta_dist_y;
-	}
-}
-
 void dda_algorithm(t_data *data, t_game *cube)
 {
 	while (data->hit == 0)
@@ -208,98 +165,6 @@ int game_loop(t_game *cube)
 	return (0);
 }
 
-void init_direction(t_game *cube)
-{
-	if (cube->player->direction == 'W')
-	{
-		cube->player->dirX = -1;
-		cube->player->planeY = 0.66;
-	}
-	if (cube->player->direction == 'E')
-	{
-		cube->player->dirX = 1;
-		cube->player->planeY = -0.66;
-	}
-	if (cube->player->direction == 'N')
-	{
-		cube->player->dirY = 1;
-		cube->player->planeX = -0.66;
-	}
-	if (cube->player->direction == 'S')
-	{
-		cube->player->dirY = -1;
-		cube->player->planeX = 0.66;
-	}
-}
-
-void save_player(t_game *cube)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (cube->map[i] != NULL)
-	{
-		j = 0;
-		while (cube->map[i][j] != '\0')
-		{
-			if (is_player(cube->map[i][j]))
-			{
-				cube->player->posX = i;
-				cube->player->posY = j;
-				break;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-int player_exist(t_game *game)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (game->map[++i])
-	{
-		j = -1;
-		while (game->map[i][++j])
-		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'E' || game->map[i][j] == 'W')
-			{
-				game->player->posY = i + 0.5;
-				game->player->posX = j + 0.5;
-				game->player->direction = game->map[i][j];
-				game->map[i][j] = '0';
-				return (1);
-			}
-		}
-	}
-	return (0);
-}
-
-int handle_mouse(int x, int y, void *cube)
-{
-	double normalized_x;
-	double max_rotation_angle;
-	double rotation_angle;
-	double new_rotation_angle;
-
-	(void)y;
-	mlx_mouse_hide(((t_game *)cube)->mlx, ((t_game *)cube)->mlx_win);
-	normalized_x = (2.0f * x) / SCREENWIDTH - 1.0f;
-	max_rotation_angle = 180.0f;
-	rotation_angle = max_rotation_angle * normalized_x;
-	new_rotation_angle = rotation_angle;
-	if (((t_game *)cube)->player->rot_angle != 360)
-		new_rotation_angle = ((t_game *)cube)->player->rot_angle - rotation_angle;
-	((t_game *)cube)->player->rot_angle = rotation_angle;
-	rotate_cam(new_rotation_angle, (t_game *)cube);
-	return (0);
-}
-
-
 void initialize_game(t_game *cube, char **argv)
 {
 	is_cube(argv[1]);
@@ -344,8 +209,6 @@ int main(int argc, char **argv)
 		start_game(cube);
 	}
 	else
-	{
 		write(2, "Error\nInvalid number of arguments\n", 34);
-	}
 	exit(0);
 }

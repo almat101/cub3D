@@ -124,8 +124,13 @@ typedef struct s_game
 } t_game;
 
 // init.c
-void init_all(t_game *cube);
-int close_window(t_game *cube);
+void			init_all(t_game *cube);
+void			init_all2(t_game *cube);
+int				close_window(t_game *cube);
+void			init_data(t_data *data, t_game *cube, int x);
+void			init_step(t_data *data, t_game *cube);
+void			init_direction(t_game *cube);
+
 
 // parser.c
 void parse_info(char **argv, t_game *cube);
@@ -135,8 +140,6 @@ int count_lines(t_list *lst);
 void copy_all_map(t_list *lst, t_game *cube);
 
 // main.c
-void init_step(t_data *data, t_game *cube);
-void init_data(t_data *data, t_game *cube, int x);
 void dda_algorithm(t_data *data, t_game *cube);
 void render_map(t_game *cube);
 
@@ -161,15 +164,16 @@ char *to_hex(int decimal);
 void rgb_to_hex(t_game *cube);
 
 // map.c
-void extract_real_map(t_game *cube);
-void replace_tabs_in_real_map(char ***map, int num_lines);
-void check_map(t_game *cube);
-char *replace_tabs_with_spaces(const char *str, int tab_count);
-void check_real_map(t_game *cube);
+void			extract_real_map(t_game *cube);
+void			replace_tabs_in_real_map(char ***map, int num_lines);
+void			check_map(t_game *cube);
+char			*replace_tabs_with_spaces(const char *str, int tab_count);
+void			check_real_map(t_game *cube);
 
 // key.c
-int key_press(int key, t_game *cube);
-int key_release(int key, t_game *cube);
+int				key_press(int key, t_game *cube);
+int				key_release(int key, t_game *cube);
+int				handle_mouse(int x, int y, void *cube);
 
 // utils.c
 u_int64_t get_time(void);
@@ -185,8 +189,9 @@ void print_texture_value(t_game *cube);
 void printf_player(t_game *cube);
 
 // utils3.c
-int is_player(char c);
-void save_player(t_game *cube);
+int			is_player(char c);
+void		save_player(t_game *cube);
+int			player_exist(t_game *game);
 
 // utils4.c
 int ft_strlen_row(char **info);
@@ -212,25 +217,23 @@ int wallPosRayPosOnWall(t_data *data, t_game *cube);
 void drawTextWall(t_data *data, t_game *cube, int x);
 
 // free.c
-void free_all(t_game *cube);
-void free_texture(t_game *cube);
-void free_list(t_list *lst);
-void free_mat(char **mat);
-void free_colors(t_game *cube);
-void free_all2(t_game *cube);
+void			free_all(t_game *cube);
+void			free_texture(t_game *cube);
+void			free_list(t_list *lst);
+void			free_mat(char **mat);
+void			free_colors(t_game *cube);
+void			free_all2(t_game *cube);
 
 // utils5.c
-int			is_space(char c);
-char		*trim_whitespace(char *str);
-
-int	handle_mouse(int x, int y, void	*cube);
+int				is_space(char c);
+char			*trim_whitespace(char *str);
 
 // moves.c
 void			move_forward(t_game *cube, double moveSpeed);
-void 			move_backward(t_game *cube, double moveSpeed);
-void 			move_right(t_game *cube, double moveSpeed);
-void 			move_left(t_game *cube, double moveSpeed);
-void 			update_movement(t_game *cube);
+void			move_backward(t_game *cube, double moveSpeed);
+void			move_right(t_game *cube, double moveSpeed);
+void			move_left(t_game *cube, double moveSpeed);
+void			update_movement(t_game *cube);
 
 //rotate.c
 void			rotate_to_left(t_game *cube, double rot_speed);
