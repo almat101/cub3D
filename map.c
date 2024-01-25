@@ -54,10 +54,56 @@ void	extract_real_map(t_game *cube)
 	cube->map_height = ft_strlen_row(cube->map);
 }
 
-void	check_real_map(t_game *cube)
+// void	check_real_map(t_game *cube)
+// {
+// 	int		i;
+// 	int		is_map;
+
+// 	is_map = 0;
+// 	i = 0;
+// 	while (cube->info[i] != NULL)
+// 	{
+// 		if (ft_strncmp(cube->info[i], "NO ", 3) == 0 ||
+// 			ft_strncmp(cube->info[i], "SO ", 3) == 0 ||
+// 			ft_strncmp(cube->info[i], "WE ", 3) == 0 ||
+// 			ft_strncmp(cube->info[i], "EA ", 3) == 0 ||
+// 			ft_strncmp(cube->info[i], "F ", 2) == 0 ||
+// 			ft_strncmp(cube->info[i], "C ", 2) == 0 ||
+// 			ft_strncmp(cube->info[i] , "\n", 1) == 0)
+// 		{
+// 			i++;
+// 			if (is_map && ft_strncmp(cube->info[i - 1], "\n", 1) == 0)
+// 			{
+// 				while (cube->info[i] != NULL && ft_strncmp(cube->info[i], "\n", 1) == 0)
+// 					i++;
+// 				if (cube->info[i] != NULL)
+// 					free_err(cube, "Error\nEmpty line in map\n");
+// 			}
+// 			if (cube->info[i] == NULL && !is_map)
+// 				free_err(cube, "Error\nNo Map after texture and colors\n");
+// 			continue ;
+// 		}
+// 		is_map = 1;
+// 		i++;
+// 	}
+// }
+
+void check_empty_line_in_map(t_game *cube, int *i, int is_map)
 {
-	int		i;
-	int		is_map;
+	if (is_map && ft_strncmp(cube->info[*i - 1], "\n", 1) == 0)
+	{
+		while (cube->info[*i] != NULL
+			&& ft_strncmp(cube->info[*i], "\n", 1) == 0)
+			(*i)++;
+		if (cube->info[*i] != NULL)
+			free_err(cube, "Error\nEmpty line in map\n");
+	}
+}
+
+void check_real_map(t_game *cube)
+{
+	int i;
+	int is_map;
 
 	is_map = 0;
 	i = 0;
@@ -72,13 +118,7 @@ void	check_real_map(t_game *cube)
 			ft_strncmp(cube->info[i] , "\n", 1) == 0)
 		{
 			i++;
-			if (is_map && ft_strncmp(cube->info[i - 1], "\n", 1) == 0)
-			{
-				while (cube->info[i] != NULL && ft_strncmp(cube->info[i], "\n", 1) == 0)
-					i++;
-				if (cube->info[i] != NULL)
-					free_err(cube, "Error\nEmpty line in map\n");
-			}
+			check_empty_line_in_map(cube, &i, is_map);
 			if (cube->info[i] == NULL && !is_map)
 				free_err(cube, "Error\nNo Map after texture and colors\n");
 			continue ;
