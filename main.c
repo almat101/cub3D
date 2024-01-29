@@ -21,12 +21,12 @@ void	initialize_game(t_game *cube, char **argv)
 	rgb_to_hex(cube);
 	check_real_map(cube);
 	extract_real_map(cube);
-	check_borders(cube);
 	replace_tabs_in_real_map(&cube->map, cube->map_height);
-	check_player(cube);
+	check_nplayer(cube);
 	check_symbols(cube);
+	check_edges(cube);
 	check_flmap(cube);
-	check_map(cube);
+	check_inner_map(cube);
 	save_player(cube);
 	if (!player_exist(cube))
 		free_err(cube, "Error\nPlayer doesn't exist\n");

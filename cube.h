@@ -147,11 +147,11 @@ void check_rgb(t_game *cube);
 void check_valid_rgb(t_game *cube, char *line);
 
 // check2.c
-void is_cube(t_game *cube, char *argv);
-void check_player(t_game *cube);
-void check_map(t_game *cube);
-void check_flmap(t_game *cube);
-void check_symbols(t_game *cube);
+void			check_nplayer(t_game *cube);
+void			check_inner_map(t_game *cube);
+void			check_flmap(t_game *cube);
+void			check_symbols(t_game *cube);
+void			check_edges(t_game *cube);
 
 // color.c
 int ft_rgb(int r, int g, int b);
@@ -224,6 +224,7 @@ void			free_all2(t_game *cube);
 int				is_space(char c);
 char			*trim_whitespace(char *str);
 void			mlx_hooks(t_game *cube);
+void			is_cube(t_game *cube, char *argv);
 
 // moves.c
 void			move_forward(t_game *cube, double moveSpeed);
@@ -256,6 +257,5 @@ int				game_loop(t_game *cube);
 void			initialize_game(t_game *cube, char **argv);
 void			start_game(t_game *cube);
 
-void			check_borders(t_game *cube);
 
 #endif

@@ -28,3 +28,23 @@ void mlx_hooks(t_game *cube)
 	mlx_hook(cube->mlx_win, 2, 1L << 0, key_press, (void *)cube);
 	mlx_hook(cube->mlx_win, 3, 1L << 1, key_release, (void *)cube);
 }
+
+// check if the file is a .cub file
+void is_cube(t_game *cube, char *argv)
+{
+	int len;
+
+	len = ft_strlen(argv);
+	if (len < 5)
+	{
+		printf("Error\nInvalid file extension\n");
+		free(cube);
+		exit(1);
+	}
+	if (ft_strncmp(argv + len - 4, ".cub", 4) != 0)
+	{
+		printf("Error\nInvalid file extension\n");
+		free(cube);
+		exit(1);
+	}
+}

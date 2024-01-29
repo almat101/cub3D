@@ -1,27 +1,7 @@
 #include "cube.h"
 
-// check if the file is a .cub file
-void is_cube(t_game *cube, char *argv)
-{
-	int len;
-
-	len = ft_strlen(argv);
-	if (len < 5)
-	{
-		printf("Error\nInvalid file extension\n");
-		free(cube);
-		exit(1);
-	}
-	if (ft_strncmp(argv + len - 4, ".cub", 4) != 0)
-	{
-		printf("Error\nInvalid file extension\n");
-		free(cube);
-		exit(1);
-	}
-}
-
 // check if the numbers of player is valid
-void check_player(t_game *cube)
+void	check_nplayer(t_game *cube)
 {
 	int i;
 	int j;
@@ -44,8 +24,7 @@ void check_player(t_game *cube)
 		free_err(cube, "Error\nInvalid number of players\n");
 }
 
-// check if the map is surrounded by walls
-void	check_map(t_game *cube)
+void	check_inner_map(t_game *cube)
 {
 	int x;
 	int y;
@@ -56,17 +35,14 @@ void	check_map(t_game *cube)
 		x = 0;
 		while (cube->map[y][x])
 		{
-			if (ft_strchr("0NWSE", cube->map[y][x]))
+			if (ft_strchr("N0WSE", cube->map[y][x]))
 			{
-				if ((cube->map[y][x] == '0') && (cube->map[y - 1][x] == 0
-					|| cube->map[y + 1][x] == 0))
-					free_err(cube, "Error\nnot surrounded by wall\n");
-				if (((cube->map[y - 1][x] == 32 || cube->map[y + 1][x] == 32
-					|| cube->map[y][x - 1] == 32 || cube->map[y][x + 1] == 32))
-					|| ((cube->map[y][x + 1] == '\n' ||
-					cube->map[y][x - 1] == '\n' || cube->map[y + 1][x] == '\n'
-					|| cube->map[y - 1][x] == '\n')))
-					free_err(cube, "Error\nnot surrounded by wall\n");
+				if (cube->map[y - 1][x] == 32 || cube->map[y + 1][x] == 32
+					|| cube->map[y][x - 1] == 32 || cube->map[y][x + 1] == 32)
+					free_err(cube, "Error\nthe map is not enclosed by 1s!\n");
+				else if (cube->map[y - 1][x] == 10 || cube->map[y + 1][x] == 10
+					|| cube->map[y][x + 1] == 10 || cube->map[y][x - 1] == 10)
+					free_err(cube, "Error\nthe map is not enclosed by 1s!\n");
 			}
 			x++;
 		}
@@ -75,7 +51,7 @@ void	check_map(t_game *cube)
 }
 
 // check first and last line of the map
-void	check_flmap(t_game *cube)
+void check_flmap(t_game *cube)
 {
 	int x;
 	int y;
@@ -84,22 +60,45 @@ void	check_flmap(t_game *cube)
 	x = 0;
 	while (cube->map[y][x])
 	{
-		if (cube->map[y][x] == '0')
-			free_err(cube, "Error\nnot surrounded by wall\n");
+		if (ft_strchr("0NWSE", cube->map[y][x]))
+			free_err(cube, "Error\ngeneral error on first line\n");
 		x++;
 	}
+
 	y = cube->map_height - 1;
 	x = 0;
 	while (cube->map[y][x])
 	{
-		if (cube->map[y][x] == '0')
-			free_err(cube, "Error\nnot surrounded by wall\n");
+		if (ft_strchr("0NWSE", cube->map[y][x]))
+			free_err(cube, "Error\ngeneral error on last line\n");
 		x++;
 	}
 }
 
+void	check_edges(t_game *cube)
+{
+	int y;
+	int first_x;
+	int last_x;
+
+	y = 0;
+	while (cube->map[y])
+	{
+		first_x = 0;
+		last_x = ft_strlen(cube->map[y]) - 1;
+
+		if (ft_strchr("0NSWE", cube->map[y][first_x]))
+			free_err(cube, "Error\nInvalid character at the start of a line\n");
+
+		if (ft_strchr("0NSWE", cube->map[y][last_x]))
+			free_err(cube, "Error\nInvalid character at the end of a line\n");
+
+		y++;
+	}
+}
+
 // check if there is any invalid symbols in the map
-void check_symbols(t_game *cube)
+void	check_symbols(t_game *cube)
 {
 	int i;
 	int j;
@@ -117,59 +116,3 @@ void check_symbols(t_game *cube)
 		i++;
 	}
 }
-
-void	check_borders(t_game *cube)
-{
-	int	y;
-	int	x;
-
-	x = 0;
-	y = 0;
-
-	while (cube->map[0][x])
-	{
-		if (cube->map[0][x] == 'N')
-			free_err(cube, "Error\nN found on the first line\n");
-		x++;
-	}
-	x = 0;
-	while (cube->map[y][0])
-	{
-		if (cube->map[y][0] == 'N')
-			free_err(cube, "Error\nN found on the first line\n");
-		y++;
-	}
-
-	// while (cube->map[y][x])
-	// {
-	// 	while (cube->map[y][x] != 'N')
-	// 		x++;
-	// 	if (cube->map[y][0] != '1' && cube->map[y][0] != 32)
-	// 		free_err(cube, "Error\nN found on the first column\n");
-	// 	y++;
-	// }
-}
-
-
-// void	check_borders(t_game *cube)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	x = 0;
-// 	y = 0;
-
-// 	while (cube->map[0][x])
-// 	{
-// 		if (cube->map[0][x] == 'N')
-// 			free_err(cube, "Error\nN found on the first line\n");
-// 		x++;
-// 	}
-// 	x = 0;
-// 	while (cube->map[y][x])
-// 	{
-// 		if (cube->map[y][x] == 'N' && cube->map[y - 1] && ( cube->map[y - 1][x] == '0' || cube->map[y - 1][x] == '1'))
-// 			free_err(cube, "Error\nN found on the first column\n");
-// 		y++;
-// 	}
-// }
