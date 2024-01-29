@@ -54,6 +54,6 @@ int main(int argc, char **argv)
 		start_game(cube);
 	}
 	else
-		write(2, "Error\nInvalid number of arguments\n", 34);
+		printf("Error\nInvalid number of arguments\n");
 	exit(0);
 }

@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
 
 %.o: %.c
-	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $(SRCS)
+	$(CC) $(FLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 all : $(LIBFT) $(FT_PRINTF) $(MINI) $(NAME)
 

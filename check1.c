@@ -16,8 +16,7 @@ void extract_colors(t_game *cube)
 	}
 	if (cube->colors->f_floor == 0 || cube->colors->c_ceil == 0)
 	{
-		write(2, "Error\nInvalid color\n", 21);
-		free_all2(cube);
+		free_err(cube, "Error\nInvalid color\n");
 		exit(1);
 	}
 }
@@ -29,8 +28,7 @@ void assign_colors(t_game *cube, char **dest, char *src, int *flag)
 	src = trim_whitespace(src);
 	if (*flag == 1)
 	{
-		write(2, "Error\nInvalid color\n", 21);
-		free_all(cube);
+		free_err(cube, "Error\nInvalid color\n");
 		exit(1);
 	}
 	else if (*flag == 0)
@@ -49,8 +47,7 @@ void ft_rgb_err(t_game *cube, char *line, char **rgb_value)
 	{
 		if (line[i] == ',')
 		{
-			write(2, "Error\nInvalid color\n", 21);
-			free_all2(cube);
+			free_err(cube, "Error\nInvalid color\n");
 			free_mat(rgb_value);
 			exit(1);
 		}

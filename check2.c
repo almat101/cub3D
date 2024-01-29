@@ -8,14 +8,13 @@ void is_cube(t_game *cube, char *argv)
 	len = ft_strlen(argv);
 	if (len < 5)
 	{
-		write(2, "Error\nInvalid file extension\n", 30);
+		printf("Error\nInvalid file extension\n");
 		free(cube);
 		exit(1);
 	}
 	if (ft_strncmp(argv + len - 4, ".cub", 4) != 0)
 	{
-		write(2, "Error\nInvalid file extension\n", 30);
-		write(2, "Please use .cub file\n", 21);
+		printf("Error\nInvalid file extension\n");
 		free(cube);
 		exit(1);
 	}
@@ -46,7 +45,7 @@ void check_player(t_game *cube)
 }
 
 // check if the map is surrounded by walls
-void check_map(t_game *cube)
+void	check_map(t_game *cube)
 {
 	int x;
 	int y;
@@ -76,7 +75,7 @@ void check_map(t_game *cube)
 }
 
 // check first and last line of the map
-void check_flmap(t_game *cube)
+void	check_flmap(t_game *cube)
 {
 	int x;
 	int y;

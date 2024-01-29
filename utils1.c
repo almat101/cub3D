@@ -50,7 +50,6 @@ void	count_fps(t_game *cube)
 void	free_err(t_game *cube, char *s)
 {
 	free_all2(cube);
-	while (*s)
-		write(2, s++, 1);
+	printf("%s",s);
 	exit(1);
 }
