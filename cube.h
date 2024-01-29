@@ -256,4 +256,6 @@ int				game_loop(t_game *cube);
 void			initialize_game(t_game *cube, char **argv);
 void			start_game(t_game *cube);
 
+void			check_borders(t_game *cube);
+
 #endif

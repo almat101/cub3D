@@ -21,6 +21,7 @@ void	initialize_game(t_game *cube, char **argv)
 	rgb_to_hex(cube);
 	check_real_map(cube);
 	extract_real_map(cube);
+	check_borders(cube);
 	replace_tabs_in_real_map(&cube->map, cube->map_height);
 	check_player(cube);
 	check_symbols(cube);

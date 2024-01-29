@@ -117,3 +117,59 @@ void check_symbols(t_game *cube)
 		i++;
 	}
 }
+
+void	check_borders(t_game *cube)
+{
+	int	y;
+	int	x;
+
+	x = 0;
+	y = 0;
+
+	while (cube->map[0][x])
+	{
+		if (cube->map[0][x] == 'N')
+			free_err(cube, "Error\nN found on the first line\n");
+		x++;
+	}
+	x = 0;
+	while (cube->map[y][0])
+	{
+		if (cube->map[y][0] == 'N')
+			free_err(cube, "Error\nN found on the first line\n");
+		y++;
+	}
+
+	// while (cube->map[y][x])
+	// {
+	// 	while (cube->map[y][x] != 'N')
+	// 		x++;
+	// 	if (cube->map[y][0] != '1' && cube->map[y][0] != 32)
+	// 		free_err(cube, "Error\nN found on the first column\n");
+	// 	y++;
+	// }
+}
+
+
+// void	check_borders(t_game *cube)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	x = 0;
+// 	y = 0;
+
+// 	while (cube->map[0][x])
+// 	{
+// 		if (cube->map[0][x] == 'N')
+// 			free_err(cube, "Error\nN found on the first line\n");
+// 		x++;
+// 	}
+// 	x = 0;
+// 	while (cube->map[y][x])
+// 	{
+// 		if (cube->map[y][x] == 'N' && cube->map[y - 1] && ( cube->map[y - 1][x] == '0' || cube->map[y - 1][x] == '1'))
+// 			free_err(cube, "Error\nN found on the first column\n");
+// 		y++;
+// 	}
+// }
