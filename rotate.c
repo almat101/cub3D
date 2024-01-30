@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:51:15 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 12:54:04 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 14:43:08 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,4 @@ void	update_rotation(t_game *cube)
 		rotate_to_right(cube, rot_speed);
 	if (cube->player->cam_dir == 1)
 		rotate_to_left(cube, rot_speed);
-}
-
-void	rotate_cam(float angle, t_game *cube)
-{
-	double	new_dir_x;
-	double	new_dir_y;
-	double	new_plane_x;
-	double	new_plane_y;
-
-	angle = angle * M_PI / 180.0f;
-	new_dir_x = cube->player->dirX * cos(angle)
-		- cube->player->dirY * sin(angle);
-	new_dir_y = cube->player->dirX * sin(angle)
-		+ cube->player->dirY * cos(angle);
-	new_plane_x = cube->player->planeX * cos(angle)
-		- cube->player->planeY * sin(angle);
-	new_plane_y = cube->player->planeX * sin(angle)
-		+ cube->player->planeY * cos(angle);
-	cube->player->dirX = new_dir_x;
-	cube->player->dirY = new_dir_y;
-	cube->player->planeX = new_plane_x;
-	cube->player->planeY = new_plane_y;
 }

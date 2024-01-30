@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:59:38 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 13:01:24 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 14:42:41 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ char	*trim_whitespace(char *str)
 
 void	mlx_hooks(t_game *cube)
 {
-	mlx_hook(cube->mlx_win, 17, 0, close_window, cube);
-	mlx_hook(cube->mlx_win, 6, 1L << 6, handle_mouse, (void *)cube);
 	mlx_hook(cube->mlx_win, 2, 1L << 0, key_press, (void *)cube);
 	mlx_hook(cube->mlx_win, 3, 1L << 1, key_release, (void *)cube);
+	mlx_hook(cube->mlx_win, 17, 0, close_window, cube);
 }
 
 // check if the file is a .cub file
