@@ -44,12 +44,13 @@ all : $(LIBFT) $(FT_PRINTF) $(MINI) $(NAME)
 clean :
 	make clean -C libft
 	make clean -C ft_printf
-	rm -rf $(OBJS) $(LIBFT)
+	rm -rf $(OBJS)
 	@echo "$(YELLOW)object files deleted!$(DEFAULT)"
 
 fclean:
 	make fclean -C libft
 	make fclean -C ft_printf
+	rm -rf $(OBJS)
 	rm -rf $(NAME)
 	@echo "$(RED)all deleted!$(DEFAULT)"
 
