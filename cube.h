@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:01:58 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 13:18:03 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 14:17:22 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "mlx_linux/mlx.h"
 # include <stdbool.h>
 
-# define SW 2000
-# define SH 1400
+# define SW 1000
+# define SH 700
 
 typedef struct s_player
 {

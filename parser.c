@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:29:59 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 12:49:06 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 14:16:00 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_list	*read_file(int fd)
 	t_list	*lst;
 
 	lst = NULL;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		new = ft_lstnew(line);
 		if (new == NULL)
@@ -28,6 +29,7 @@ t_list	*read_file(int fd)
 			exit (1);
 		}
 		ft_lstadd_back(&lst, new);
+		line = get_next_line(fd);
 	}
 	return (lst);
 }
