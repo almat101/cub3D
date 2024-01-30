@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 12:29:59 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 12:49:06 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 t_list	*read_file(int fd)
 {
-	char *line;
-	t_list *new;
-	t_list *lst;
+	char	*line;
+	t_list	*new;
+	t_list	*lst;
 
 	lst = NULL;
 	while ((line = get_next_line(fd)) != NULL)
@@ -30,7 +42,7 @@ void	check_empty_file(t_list *lst, t_game *cube)
 	}
 }
 
-int count_lines(t_list *lst)
+int	count_lines(t_list *lst)
 {
 	int		i;
 	t_list	*new;
@@ -42,10 +54,10 @@ int count_lines(t_list *lst)
 		i++;
 		new = new->next;
 	}
-	return i;
+	return (i);
 }
 
-void copy_all_map(t_list *lst, t_game *cube)
+void	copy_all_map(t_list *lst, t_game *cube)
 {
 	int		i;
 	t_list	*new;
@@ -54,7 +66,7 @@ void copy_all_map(t_list *lst, t_game *cube)
 	i = 0;
 	new = lst;
 	line_count = count_lines(lst);
-	cube->info = malloc(sizeof(char*) * (line_count + 1));
+	cube->info = malloc(sizeof(char *) * (line_count + 1));
 	if (cube->info == NULL)
 	{
 		printf("Error\nFailed to allocate memory for map\n");
@@ -69,7 +81,6 @@ void copy_all_map(t_list *lst, t_game *cube)
 	cube->info[i] = NULL;
 }
 
-
 void	parse_info(char **argv, t_game *cube)
 {
 	int		fd;
@@ -82,5 +93,3 @@ void	parse_info(char **argv, t_game *cube)
 	copy_all_map(lst, cube);
 	free_list(lst);
 }
-
-

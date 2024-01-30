@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:02:59 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:03:00 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 // check if the file has .xpm extension
@@ -7,7 +19,7 @@ int	has_xpm_extension(const char *filename)
 
 	len = ft_strlen(filename);
 	if (len < 4)
-		return 0;
+		return (0);
 	if (ft_strncmp(filename + len - 4, ".xpm", 4) == 0)
 		return (1);
 	return (0);
@@ -16,10 +28,7 @@ int	has_xpm_extension(const char *filename)
 // assign the texture path to the corresponding variable
 void	assign(t_game *cube, char **dest, char *src, int *flag)
 {
-	//int src_len;
-
 	src = trim_whitespace(src);
-	//src_len = ft_strlen(src) - 1;
 	if (*flag == 1)
 	{
 		printf("Error\nDuplicate cardinal texture\n");
@@ -30,7 +39,6 @@ void	assign(t_game *cube, char **dest, char *src, int *flag)
 	{
 		if (!has_xpm_extension(src))
 		{
-
 			printf("Error\nInvalid texture file extension\n");
 			free_all2(cube);
 			exit(1);
@@ -41,9 +49,9 @@ void	assign(t_game *cube, char **dest, char *src, int *flag)
 }
 
 // extract the texture path from the map and check if it is valid
-void extract_texture(t_game *cube)
+void	extract_texture(t_game *cube)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cube->info[i] != NULL)
@@ -66,6 +74,3 @@ void extract_texture(t_game *cube)
 		exit (1);
 	}
 }
-
-
-

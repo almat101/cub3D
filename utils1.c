@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 12:54:48 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 12:55:25 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 u_int64_t	get_time(void)
@@ -28,7 +40,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	count_fps(t_game *cube)
 {
-	char *number;
+	char	*number;
 
 	cube->oldTime = cube->time;
 	cube->time = get_time();
@@ -43,13 +55,13 @@ void	count_fps(t_game *cube)
 	}
 	number = ft_itoa(cube->fps);
 	mlx_string_put(cube->mlx, cube->mlx_win,
-		SCREENWIDTH - 50, 20, -1, number);
+		SW - 50, 20, -1, number);
 	free(number);
 }
 
 void	free_err(t_game *cube, char *s)
 {
 	free_all2(cube);
-	printf("%s",s);
+	printf("%s", s);
 	exit(1);
 }

@@ -1,126 +1,138 @@
-#ifndef cube_H
-#define cube_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:01:58 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:18:03 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <math.h>
-#include <sys/time.h>
-#include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
-#include "mlx_linux/mlx.h"
-#include <stdbool.h>
+#ifndef CUBE_H
+# define CUBE_H
 
-#define SCREENWIDTH 1440
-#define SCREENHEIGHT 900
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <math.h>
+# include <sys/time.h>
+# include "./libft/libft.h"
+# include "./ft_printf/ft_printf.h"
+# include "mlx_linux/mlx.h"
+# include <stdbool.h>
+
+# define SW 2000
+# define SH 1400
 
 typedef struct s_player
 {
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	double mov_dirX;
-	double mov_dirY;
-	double cam_dir;
-	double rot_angle;
-	char direction;
-} t_player;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			planeX;
+	double			planeY;
+	double			mov_dirX;
+	double			mov_dirY;
+	double			cam_dir;
+	double			rot_angle;
+	char			direction;
+}			t_player;
 
 typedef struct s_img
 {
-	void *img;
-	char *addr;
-	int bpp;
-	int line_length;
-	int endian;
-} t_img;
+	char			*addr;
+	int				bpp;
+	int				endian;
+	int				line_length;
+	void			*img;
+}			t_img;
 
 typedef struct s_data
 {
-	double camera_x;
-	double delta_dist_x;
-	double delta_dist_y;
-	double map_x;
-	double map_y;
-	double perp_wall_dist;
-	double ray_dir_x;
-	double ray_dir_y;
-	double side_dist_x;
-	double side_dist_y;
-	double step_x;
-	double step_y;
-	double step;
-	double tex_pos;
-	double wall_x;
-	int draw_end;
-	int draw_start;
-	int hit;
-	int line_height;
-	int side;
-	int tex_height;
-	int tex_width;
-	int tex_x;
-	int tex_y;
-	unsigned int color;
-} t_data;
+	double			camera_x;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			map_x;
+	double			map_y;
+	double			perp_wall_dist;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			step_x;
+	double			step_y;
+	double			step;
+	double			tex_pos;
+	double			wall_x;
+	int				draw_end;
+	int				draw_start;
+	int				hit;
+	int				line_height;
+	int				side;
+	int				tex_height;
+	int				tex_width;
+	int				tex_x;
+	int				tex_y;
+	unsigned int	color;
+}			t_data;
 
 typedef struct s_colors
 {
-	int f_floor;
-	int c_ceil;
-	char *floor_color;
-	char *ceil_color;
-	char *f_hex_color;
-	char *c_hex_color;
-} t_colors;
+	int				f_floor;
+	int				c_ceil;
+	char			*floor_color;
+	char			*ceil_color;
+	char			*f_hex_color;
+	char			*c_hex_color;
+}			t_colors;
 
 typedef struct s_xpm_img
 {
-	void *img;
-	void *addr;
-	int bpp;
-	int line_length;
-	int endian;
-	int width;
-	int height;
-} t_xpm_img;
+	void			*img;
+	void			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+}			t_xpm_img;
 
 typedef struct s_cards
 {
-	t_xpm_img north_wall;
-	t_xpm_img south_wall;
-	t_xpm_img east_wall;
-	t_xpm_img west_wall;
-	char *no;
-	char *so;
-	char *ea;
-	char *we;
-	int n;
-	int s;
-	int w;
-	int e;
-} t_cards;
+	t_xpm_img		north_wall;
+	t_xpm_img		south_wall;
+	t_xpm_img		east_wall;
+	t_xpm_img		west_wall;
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
+	int				n;
+	int				s;
+	int				w;
+	int				e;
+}			t_cards;
 
 typedef struct s_game
 {
-	void *mlx;
-	void *mlx_win;
-	t_colors *colors;
-	t_player *player;
-	double time;
-	double oldTime;
-	int fps;
-	double frameTime;
-	t_img *img;
-	char **info;
-	char **map;
-	int map_width;
-	int map_height;
-	t_cards *card;
+	char			**info;
+	char			**map;
+	double			frameTime;
+	double			oldTime;
+	double			time;
+	int				fps;
+	int				map_height;
+	int				map_width;
+	t_cards			*card;
+	t_colors		*colors;
+	t_img			*img;
+	t_player		*player;
+	void			*mlx_win;
+	void			*mlx;
 } t_game;
 
 // init.c
@@ -133,18 +145,18 @@ void			init_direction(t_game *cube);
 
 
 // parser.c
-void parse_info(char **argv, t_game *cube);
-t_list *read_file(int fd);
-void check_empty_file(t_list *lst, t_game *cube);
-int count_lines(t_list *lst);
-void copy_all_map(t_list *lst, t_game *cube);
+void			parse_info(char **argv, t_game *cube);
+t_list			*read_file(int fd);
+void			check_empty_file(t_list *lst, t_game *cube);
+int				count_lines(t_list *lst);
+void			copy_all_map(t_list *lst, t_game *cube);
 
 // check1.c
-void extract_colors(t_game *cube);
-void assign_colors(t_game *cube, char **dest, char *src, int *flag);
-void ft_rgb_err(t_game *cube, char *line, char **rgb_value);
-void check_rgb(t_game *cube);
-void check_valid_rgb(t_game *cube, char *line);
+void			extract_colors(t_game *cube);
+void			assign_colors(t_game *cube, char **dest, char *src, int *flag);
+void			ft_rgb_err(t_game *cube, char *line, char **rgb_value);
+void			check_rgb(t_game *cube);
+void			check_valid_rgb(t_game *cube, char *line);
 
 // check2.c
 void			check_nplayer(t_game *cube);
@@ -154,10 +166,10 @@ void			check_symbols(t_game *cube);
 void			check_edges(t_game *cube);
 
 // color.c
-int ft_rgb(int r, int g, int b);
-void convert_color(t_game *cube, char *line, int is_floor);
-char *to_hex(int decimal);
-void rgb_to_hex(t_game *cube);
+int				ft_rgb(int r, int g, int b);
+void			convert_color(t_game *cube, char *line, int is_floor);
+char			*to_hex(int decimal);
+void			rgb_to_hex(t_game *cube);
 
 // map.c
 void			extract_real_map(t_game *cube);
@@ -172,33 +184,33 @@ int				key_release(int key, t_game *cube);
 int				handle_mouse(int x, int y, void *cube);
 
 // utils.c
-u_int64_t get_time(void);
-void ft_sleep(u_int64_t time);
-void my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void count_fps(t_game *cube);
-void free_err(t_game *cube, char *s);
+u_int64_t		get_time(void);
+void			ft_sleep(u_int64_t time);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			count_fps(t_game *cube);
+void			free_err(t_game *cube, char *s);
 
 // utils2.c
-void print_map(char **info);
-void print_colors_value(t_game *cube);
-void print_texture_value(t_game *cube);
-void printf_player(t_game *cube);
+void			print_map(char **info);
+void			print_colors_value(t_game *cube);
+void			print_texture_value(t_game *cube);
+void			printf_player(t_game *cube);
 
 // utils3.c
-int			is_player(char c);
-void		save_player(t_game *cube);
-int			player_exist(t_game *game);
+int				is_player(char c);
+void			save_player(t_game *cube);
+int				player_exist(t_game *game);
 
 // utils4.c
-int ft_strlen_row(char **info);
-void replace_tabs_in_real_map(char ***map, int num_lines);
-int count_tab(char *line);
-char *replace_tabs_with_spaces(const char *str, int tab_count);
+int				count_tab(char *line);
+int				ft_strlen_row(char **info);
+void			replace_tabs_in_real_map(char ***map, int num_lines);
+char			*replace_tabs_with_spaces(const char *str, int tab_count);
 
 // parse_texture.c
-int has_xpm_extension(const char *filename);
-void extract_texture(t_game *cube);
-void assign(t_game *cube, char **dest, char *src, int *flag);
+int				has_xpm_extension(const char *filename);
+void			extract_texture(t_game *cube);
+void			assign(t_game *cube, char **dest, char *src, int *flag);
 
 // load_texture.c
 void			load_texture_no_so(t_game *cube);
@@ -206,11 +218,11 @@ void			load_texture_ea_we(t_game *cube);
 void			load_all_texture(t_game *cube);
 void			load_imgs(t_game *cube);
 
-void draw_vertical_line(t_data *data, t_game *cube, int x);
-void set_color(t_data *data, t_game *cube, int shift);
-void set_texwh(t_data *data, t_game *cube);
-int wall_pos(t_data *data, t_game *cube);
-void draw_textwall(t_data *data, t_game *cube, int x);
+void			draw_vertical_line(t_data *data, t_game *cube, int x);
+void			set_color(t_data *data, t_game *cube, int shift);
+void			set_texwh(t_data *data, t_game *cube);
+void			draw_textwall(t_data *data, t_game *cube, int x);
+int				wall_pos(t_data *data, t_game *cube);
 
 // free.c
 void			free_all(t_game *cube);
@@ -256,6 +268,5 @@ int				wall_pos(t_data *data, t_game *cube);
 int				game_loop(t_game *cube);
 void			initialize_game(t_game *cube, char **argv);
 void			start_game(t_game *cube);
-
 
 #endif

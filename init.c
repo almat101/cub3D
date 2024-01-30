@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:02:17 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:02:18 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-void init_all(t_game *cube)
+void	init_all(t_game *cube)
 {
 	cube->player = ft_calloc(1, sizeof(t_player));
 	cube->colors = ft_calloc(1, sizeof(t_colors));
@@ -43,13 +55,13 @@ void	init_all2(t_game *cube)
 	cube->colors->c_hex_color = NULL;
 }
 
-
-
-void init_data(t_data *data, t_game *cube, int x)
+void	init_data(t_data *data, t_game *cube, int x)
 {
-	data->camera_x = 2 * x / (double)SCREENWIDTH - 1;
-	data->ray_dir_x = cube->player->dirX + cube->player->planeX * data->camera_x;
-	data->ray_dir_y = cube->player->dirY + cube->player->planeY * data->camera_x;
+	data->camera_x = 2 * x / (double)SW - 1;
+	data->ray_dir_x = cube->player->dirX
+		+ cube->player->planeX * data->camera_x;
+	data->ray_dir_y = cube->player->dirY
+		+ cube->player->planeY * data->camera_x;
 	data->map_x = (int)cube->player->posX;
 	data->map_y = (int)cube->player->posY;
 	if (data->ray_dir_x == 0)
@@ -64,27 +76,31 @@ void init_data(t_data *data, t_game *cube, int x)
 	init_step(data, cube);
 }
 
-void init_step(t_data *data, t_game *cube)
+void	init_step(t_data *data, t_game *cube)
 {
 	if (data->ray_dir_x < 0)
 	{
 		data->step_x = -1;
-		data->side_dist_x = (cube->player->posX - (int)data->map_x) * data->delta_dist_x;
+		data->side_dist_x = (cube->player->posX - (int)data->map_x)
+			* data->delta_dist_x;
 	}
 	else
 	{
 		data->step_x = 1;
-		data->side_dist_x = ((int)data->map_x + 1.0 - cube->player->posX) * data->delta_dist_x;
+		data->side_dist_x = ((int)data->map_x + 1.0 - cube->player->posX)
+			* data->delta_dist_x;
 	}
 	if (data->ray_dir_y < 0)
 	{
 		data->step_y = -1;
-		data->side_dist_y = (cube->player->posY - (int)data->map_y) * data->delta_dist_y;
+		data->side_dist_y = (cube->player->posY - (int)data->map_y)
+			* data->delta_dist_y;
 	}
 	else
 	{
 		data->step_y = 1;
-		data->side_dist_y = ((int)data->map_y + 1.0 - cube->player->posY) * data->delta_dist_y;
+		data->side_dist_y = ((int)data->map_y + 1.0 - cube->player->posY)
+			* data->delta_dist_y;
 	}
 }
 

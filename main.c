@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:02:32 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:02:33 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 int	game_loop(t_game *cube)
@@ -43,9 +55,9 @@ void	start_game(t_game *cube)
 	mlx_loop(cube->mlx);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_game *cube;
+	t_game	*cube;
 
 	(void)argv;
 	if (argc == 2)

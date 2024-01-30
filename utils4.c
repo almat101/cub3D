@@ -1,21 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils4.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 12:57:21 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 12:58:20 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-int ft_strlen_row(char **info)
+int	ft_strlen_row(char **info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (info[i] != NULL)
-	{
 		i++;
-	}
-	return i;
+	return (i);
 }
 
-void replace_tabs_in_real_map(char ***map, int num_lines)
+void	replace_tabs_in_real_map(char ***map, int num_lines)
 {
-	int i;
-	char *new_line;
+	int		i;
+	char	*new_line;
 
 	i = 0;
 	while (i < num_lines)
@@ -27,10 +37,10 @@ void replace_tabs_in_real_map(char ***map, int num_lines)
 	}
 }
 
-int count_tab(char *line)
+int	count_tab(char *line)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -44,11 +54,11 @@ int count_tab(char *line)
 	return (count);
 }
 
-char *replace_tabs_with_spaces(const char *str, int tab_count)
+char	*replace_tabs_with_spaces(const char *str, int tab_count)
 {
-	char *new_str;
-	int i;
-	int j;
+	char	*new_str;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -69,5 +79,5 @@ char *replace_tabs_with_spaces(const char *str, int tab_count)
 		i++;
 	}
 	new_str[j] = '\0';
-	return new_str;
+	return (new_str);
 }

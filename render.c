@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 12:50:38 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:05:11 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	render_map(t_game *cube)
 {
-	t_data data;
-	int x;
+	t_data	data;
+	int		x;
 
 	x = 0;
-	while (x < SCREENWIDTH)
+	while (x < SW)
 	{
 		init_data(&data, cube, x);
 		dda_algorithm(&data, cube);
@@ -38,15 +50,15 @@ void	dda_algorithm(t_data *data, t_game *cube)
 
 void	draw_vertical_line(t_data *data, t_game *cube, int x)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (wall_pos(data, cube))
-		return;
+		return ;
 	while (i < data->draw_start)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->c_ceil);
 	draw_textwall(data, cube, x);
 	i = data->draw_end;
-	while (i < SCREENHEIGHT)
+	while (i < SH)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->f_floor);
 }

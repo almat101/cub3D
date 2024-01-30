@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:02:09 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:02:10 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	free_texture(t_game *cube)
@@ -12,7 +24,7 @@ void	free_texture(t_game *cube)
 		free(cube->card->ea);
 }
 
-void free_colors(t_game *cube)
+void	free_colors(t_game *cube)
 {
 	if ((cube->colors->floor_color) != NULL)
 		free(cube->colors->floor_color);
@@ -24,9 +36,9 @@ void free_colors(t_game *cube)
 		free(cube->colors->c_hex_color);
 }
 
-void free_list(t_list *lst)
+void	free_list(t_list *lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	while (lst != NULL)
 	{
@@ -35,9 +47,10 @@ void free_list(t_list *lst)
 		free(tmp);
 	}
 }
+
 void	free_mat(char **mat)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mat[i])

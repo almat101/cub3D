@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 12:56:14 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 12:57:07 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-int is_player(char c)
+int	is_player(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
-void save_player(t_game *cube)
+
+void	save_player(t_game *cube)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (cube->map[i] != NULL)
@@ -19,7 +32,7 @@ void save_player(t_game *cube)
 			{
 				cube->player->posX = i;
 				cube->player->posY = j;
-				break;
+				break ;
 			}
 			j++;
 		}
@@ -27,10 +40,10 @@ void save_player(t_game *cube)
 	}
 }
 
-int player_exist(t_game *game)
+int	player_exist(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (game->map[++i])
@@ -38,7 +51,8 @@ int player_exist(t_game *game)
 		j = -1;
 		while (game->map[i][++j])
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
+				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
 				game->player->posY = i + 0.5;
 				game->player->posX = j + 0.5;

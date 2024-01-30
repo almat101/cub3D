@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/30 13:02:13 by amatta            #+#    #+#             */
+/*   Updated: 2024/01/30 13:02:14 by amatta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-void free_all(t_game *cube)
+void	free_all(t_game *cube)
 {
 	if (cube->info)
 		free_mat(cube->info);
@@ -17,7 +29,7 @@ void free_all(t_game *cube)
 	free(cube);
 }
 
-void free_all2(t_game *cube)
+void	free_all2(t_game *cube)
 {
 	if (cube->info)
 		free_mat(cube->info);
@@ -31,7 +43,8 @@ void free_all2(t_game *cube)
 	free(cube->img);
 	free(cube);
 }
-int close_window(t_game *cube)
+
+int	close_window(t_game *cube)
 {
 	mlx_destroy_image(cube->mlx, cube->card->east_wall.img);
 	mlx_destroy_image(cube->mlx, cube->card->west_wall.img);
