@@ -3,9 +3,9 @@
 // check if the numbers of player is valid
 void	check_nplayer(t_game *cube)
 {
-	int i;
-	int j;
-	int count;
+	int	i;
+	int	j;
+	int	count;
 
 	j = 0;
 	count = 0;
@@ -26,8 +26,8 @@ void	check_nplayer(t_game *cube)
 
 void	check_inner_map(t_game *cube)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (cube->map[y])
@@ -51,10 +51,10 @@ void	check_inner_map(t_game *cube)
 }
 
 // check first and last line of the map
-void check_flmap(t_game *cube)
+void	check_flmap(t_game *cube)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	x = 0;
@@ -64,7 +64,6 @@ void check_flmap(t_game *cube)
 			free_err(cube, "Error\ngeneral error on first line\n");
 		x++;
 	}
-
 	y = cube->map_height - 1;
 	x = 0;
 	while (cube->map[y][x])
@@ -77,22 +76,19 @@ void check_flmap(t_game *cube)
 
 void	check_edges(t_game *cube)
 {
-	int y;
-	int first_x;
-	int last_x;
+	int	y;
+	int	first_x;
+	int	last_x;
 
 	y = 0;
 	while (cube->map[y])
 	{
 		first_x = 0;
 		last_x = ft_strlen(cube->map[y]) - 1;
-
 		if (ft_strchr("0NSWE", cube->map[y][first_x]))
-			free_err(cube, "Error\nInvalid character at the start of a line\n");
-
+			free_err(cube, "Error\nInvalid char at the start of a line\n");
 		if (ft_strchr("0NSWE", cube->map[y][last_x]))
-			free_err(cube, "Error\nInvalid character at the end of a line\n");
-
+			free_err(cube, "Error\nInvalid char at the end of a line\n");
 		y++;
 	}
 }
@@ -100,8 +96,8 @@ void	check_edges(t_game *cube)
 // check if there is any invalid symbols in the map
 void	check_symbols(t_game *cube)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (cube->map[i])

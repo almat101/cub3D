@@ -41,11 +41,11 @@ void	draw_vertical_line(t_data *data, t_game *cube, int x)
 	int i;
 
 	i = 0;
-	if (wallPosRayPosOnWall(data, cube))
+	if (wall_pos(data, cube))
 		return;
 	while (i < data->draw_start)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->c_ceil);
-	drawTextWall(data, cube, x);
+	draw_textwall(data, cube, x);
 	i = data->draw_end;
 	while (i < SCREENHEIGHT)
 		my_mlx_pixel_put(cube->img, x, i++, cube->colors->f_floor);

@@ -12,8 +12,8 @@
 #include "mlx_linux/mlx.h"
 #include <stdbool.h>
 
-#define SCREENWIDTH 1000
-#define SCREENHEIGHT 700
+#define SCREENWIDTH 1440
+#define SCREENHEIGHT 900
 
 typedef struct s_player
 {
@@ -26,7 +26,7 @@ typedef struct s_player
 	double mov_dirX;
 	double mov_dirY;
 	double cam_dir;
-	double rot_angle; //todo mouse
+	double rot_angle;
 	char direction;
 } t_player;
 
@@ -201,16 +201,16 @@ void extract_texture(t_game *cube);
 void assign(t_game *cube, char **dest, char *src, int *flag);
 
 // load_texture.c
-void			load_texture_NO_SO(t_game *cube);
-void			load_texture_EA_WE(t_game *cube);
+void			load_texture_no_so(t_game *cube);
+void			load_texture_ea_we(t_game *cube);
 void			load_all_texture(t_game *cube);
 void			load_imgs(t_game *cube);
 
 void draw_vertical_line(t_data *data, t_game *cube, int x);
 void set_color(t_data *data, t_game *cube, int shift);
-void setTexWH(t_data *data, t_game *cube);
-int wallPosRayPosOnWall(t_data *data, t_game *cube);
-void drawTextWall(t_data *data, t_game *cube, int x);
+void set_texwh(t_data *data, t_game *cube);
+int wall_pos(t_data *data, t_game *cube);
+void draw_textwall(t_data *data, t_game *cube, int x);
 
 // free.c
 void			free_all(t_game *cube);
@@ -246,11 +246,11 @@ void			dda_algorithm(t_data *data, t_game *cube);
 void			draw_vertical_line(t_data *data, t_game *cube, int x);
 
 //draw.c
-void			drawTextWall(t_data *data, t_game *cube, int x);
+void			draw_textwall(t_data *data, t_game *cube, int x);
 void			set_color(t_data *data, t_game *cube, int shift);
-void			setTexWH(t_data *data, t_game *cube);
+void			set_texwh(t_data *data, t_game *cube);
 int 			set_wall_x(t_data *data, t_game *cube);
-int				wallPosRayPosOnWall(t_data *data, t_game *cube);
+int				wall_pos(t_data *data, t_game *cube);
 
 //main.c
 int				game_loop(t_game *cube);

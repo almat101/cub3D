@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	drawTextWall(t_data *data, t_game *cube, int x)
+void	draw_textwall(t_data *data, t_game *cube, int x)
 {
 	int y;
 
@@ -34,7 +34,7 @@ void	set_color(t_data *data, t_game *cube, int shift)
 	}
 }
 
-void	setTexWH(t_data *data, t_game *cube)
+void	set_texwh(t_data *data, t_game *cube)
 {
 	if (data->side == 1)
 	{
@@ -70,7 +70,7 @@ int	set_wall_x(t_data *data, t_game *cube)
 	return (0);
 }
 
-int	wallPosRayPosOnWall(t_data *data, t_game *cube)
+int	wall_pos(t_data *data, t_game *cube)
 {
 	if (data->side == 0)
 		data->perp_wall_dist = (data->side_dist_x - data->delta_dist_x);
@@ -85,7 +85,7 @@ int	wallPosRayPosOnWall(t_data *data, t_game *cube)
 		data->draw_end = SCREENHEIGHT - 1;
 	if (set_wall_x(data, cube))
 		return (1);
-	setTexWH(data, cube);
+	set_texwh(data, cube);
 	data->tex_x = (int)(data->wall_x * (double)data->tex_width);
 	if (data->hit != 2 && data->side == 0 && data->ray_dir_x > 0)
 		data->tex_x = data->tex_width - data->tex_x - 1;

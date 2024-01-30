@@ -1,12 +1,12 @@
 #include "cube.h"
 
-int ft_rgb(int r, int g, int b)
+int	ft_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
 // convert rgb value to an int hexadecimal value
-void convert_color(t_game *cube, char *line, int is_floor)
+void	convert_color(t_game *cube, char *line, int is_floor)
 {
 	char	**rgb_values;
 	int		value[3];
@@ -21,8 +21,7 @@ void convert_color(t_game *cube, char *line, int is_floor)
 	if (is_floor)
 		cube->colors->f_floor = ft_rgb(value[0], value[1], value[2]);
 	else
-		cube->colors->c_ceil= ft_rgb(value[0], value[1], value[2]);
-
+		cube->colors->c_ceil = ft_rgb(value[0], value[1], value[2]);
 	free_mat(rgb_values);
 }
 
@@ -52,9 +51,9 @@ char	*to_hex(int decimal)
 }
 
 // convert rgb of F and C to a hexadecimal string
-void rgb_to_hex(t_game *cube)
+void	rgb_to_hex(t_game *cube)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cube->info[i] != NULL)
