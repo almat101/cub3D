@@ -29,14 +29,14 @@
 
 typedef struct s_player
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	double			mov_dirX;
-	double			mov_dirY;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			mov_dir_x;
+	double			mov_dir_y;
 	double			cam_dir;
 	double			rot_angle;
 	char			direction;
@@ -121,8 +121,8 @@ typedef struct s_game
 {
 	char			**info;
 	char			**map;
-	double			frameTime;
-	double			oldTime;
+	double			frame_time;
+	double			old_time;
 	double			time;
 	int				fps;
 	int				map_height;
@@ -133,7 +133,7 @@ typedef struct s_game
 	t_player		*player;
 	void			*mlx_win;
 	void			*mlx;
-} t_game;
+}	t_game;
 
 // init.c
 void			init_all(t_game *cube);
@@ -142,7 +142,6 @@ int				close_window(t_game *cube);
 void			init_data(t_data *data, t_game *cube, int x);
 void			init_step(t_data *data, t_game *cube);
 void			init_direction(t_game *cube);
-
 
 // parser.c
 void			parse_info(char **argv, t_game *cube);
@@ -251,7 +250,6 @@ void			rotate_to_right(t_game *cube, double rot_speed);
 void			update_rotation(t_game *cube);
 void			rotate_cam(float angle, t_game *cube);
 
-
 //render.c
 void			render_map(t_game *cube);
 void			dda_algorithm(t_data *data, t_game *cube);
@@ -261,7 +259,7 @@ void			draw_vertical_line(t_data *data, t_game *cube, int x);
 void			draw_textwall(t_data *data, t_game *cube, int x);
 void			set_color(t_data *data, t_game *cube, int shift);
 void			set_texwh(t_data *data, t_game *cube);
-int 			set_wall_x(t_data *data, t_game *cube);
+int				set_wall_x(t_data *data, t_game *cube);
 int				wall_pos(t_data *data, t_game *cube);
 
 //main.c

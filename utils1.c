@@ -42,16 +42,16 @@ void	count_fps(t_game *cube)
 {
 	char	*number;
 
-	cube->oldTime = cube->time;
+	cube->old_time = cube->time;
 	cube->time = get_time();
-	cube->frameTime = (cube->time - cube->oldTime) / 1000.0;
-	cube->fps = (int)(1.0 / cube->frameTime);
+	cube->frame_time = (cube->time - cube->old_time) / 1000.0;
+	cube->fps = (int)(1.0 / cube->frame_time);
 	if (cube->fps > 60)
 	{
-		ft_sleep(((1.0 / 60) - cube->frameTime) * 1000);
+		ft_sleep(((1.0 / 60) - cube->frame_time) * 1000);
 		cube->time = get_time();
-		cube->frameTime = (cube->time - cube->oldTime) / 1000.0;
-		cube->fps = (int)(1.0 / cube->frameTime);
+		cube->frame_time = (cube->time - cube->old_time) / 1000.0;
+		cube->fps = (int)(1.0 / cube->frame_time);
 	}
 	number = ft_itoa(cube->fps);
 	mlx_string_put(cube->mlx, cube->mlx_win,

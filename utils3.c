@@ -30,8 +30,8 @@ void	save_player(t_game *cube)
 		{
 			if (is_player(cube->map[i][j]))
 			{
-				cube->player->posX = i;
-				cube->player->posY = j;
+				cube->player->pos_x = i;
+				cube->player->pos_y = j;
 				break ;
 			}
 			j++;
@@ -54,8 +54,8 @@ int	player_exist(t_game *game)
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
 				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
-				game->player->posY = i + 0.5;
-				game->player->posX = j + 0.5;
+				game->player->pos_y = i + 0.5;
+				game->player->pos_x = j + 0.5;
 				game->player->direction = game->map[i][j];
 				game->map[i][j] = '0';
 				return (1);

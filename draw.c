@@ -81,10 +81,10 @@ void	set_texwh(t_data *data, t_game *cube)
 int	set_wall_x(t_data *data, t_game *cube)
 {
 	if (data->side == 0)
-		data->wall_x = cube->player->posY + data->perp_wall_dist
+		data->wall_x = cube->player->pos_y + data->perp_wall_dist
 			* data->ray_dir_y;
 	else
-		data->wall_x = cube->player->posX + data->perp_wall_dist
+		data->wall_x = cube->player->pos_x + data->perp_wall_dist
 			* data->ray_dir_x;
 	data->wall_x -= (int)(data->wall_x);
 	return (0);
