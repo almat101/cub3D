@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:02:13 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 13:02:14 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:15:06 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,21 @@ int	close_window(t_game *cube)
 	mlx_destroy_image(cube->mlx, cube->img->img);
 	free_all(cube);
 	exit(0);
+}
+
+void	free_err2(t_game *cube, char *s)
+{
+	free_all3(cube);
+	printf("%s", s);
+	exit(1);
+}
+
+void	free_all3(t_game *cube)
+{
+	if (cube->info)
+		free_mat(cube->info);
+	if (cube->map)
+		free_mat(cube->map);
+	free_texture(cube);
+	free_colors(cube);
 }

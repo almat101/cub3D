@@ -6,7 +6,7 @@
 /*   By: amatta <amatta@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:01:58 by amatta            #+#    #+#             */
-/*   Updated: 2024/01/30 14:17:22 by amatta           ###   ########.fr       */
+/*   Updated: 2024/01/30 16:11:33 by amatta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int				key_press(int key, t_game *cube);
 int				key_release(int key, t_game *cube);
 int				handle_mouse(int x, int y, void *cube);
 
-// utils.c
+// utils1.c
 u_int64_t		get_time(void);
 void			ft_sleep(u_int64_t time);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -229,7 +229,11 @@ void			free_texture(t_game *cube);
 void			free_list(t_list *lst);
 void			free_mat(char **mat);
 void			free_colors(t_game *cube);
+
+// free2.c
 void			free_all2(t_game *cube);
+void			free_all3(t_game *cube);
+void			free_err2(t_game *cube, char *s);
 
 // utils5.c
 int				is_space(char c);
